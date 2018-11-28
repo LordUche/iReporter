@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/LordUche/iReporter-API/issues"
   },
-  "homepage": "https://github.com/LordUche/iReporter-API#readme"
+  "homepage": "https://github.com/LordUche/iReporter-API#readme",
+  "devDependencies": {
+    "jasmine-node": "^2.0.1",
+    "nodemon": "^1.18.7",
+    "request": "^2.88.0"
+  }
 }
