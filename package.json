@@ -1,0 +1,19 @@
+{
+  "name": "ireporter-api",
+  "version": "1.0.0",
+  "description": "iReporter enables any/every citizen to bring any form of corruption to the notice of appropriate authorities and the general public. Users can also report on things that needs government intervention",
+  "main": "app.js",
+  "scripts": {
+    "test": "jasmine-node spec --color"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LordUche/iReporter-API.git"
+  },
+  "author": "Uchenna A. Iheanacho",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LordUche/iReporter-API/issues"
+  },
+  "homepage": "https://github.com/LordUche/iReporter-API#readme"
+}
