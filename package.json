@@ -1,0 +1,37 @@
+{
+  "name": "ireporter-api",
+  "version": "1.0.0",
+  "description": "iReporter enables any/every citizen to bring any form of corruption to the notice of appropriate authorities and the general public. Users can also report on things that needs government intervention",
+  "main": "app.js",
+  "scripts": {
+    "test": "jasmine-node spec --color",
+    "test:watch": "jasmine-node spec --autotest --watch . --color",
+    "lint:init": "eslint --init"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LordUche/iReporter-API.git"
+  },
+  "author": "Uchenna A. Iheanacho",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LordUche/iReporter-API/issues"
+  },
+  "homepage": "https://github.com/LordUche/iReporter-API#readme",
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "jasmine-node": "^1.16.2",
+    "nodemon": "^1.18.7",
+    "request": "^2.88.0"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "knex": "^0.15.2",
+    "pg": "^7.6.1"
+  }
+}
