@@ -2,8 +2,9 @@
   "name": "ireporter-api",
   "version": "1.0.0",
   "description": "iReporter enables any/every citizen to bring any form of corruption to the notice of appropriate authorities and the general public. Users can also report on things that needs government intervention",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
+    "start": "nodemon src/app.js",
     "test": "jasmine-node spec --color",
     "test:watch": "jasmine-node spec --autotest --watch . --color",
     "lint:init": "eslint --init"
@@ -24,7 +25,8 @@
     "eslint-plugin-import": "^2.14.0",
     "jasmine-node": "^1.16.2",
     "nodemon": "^1.18.7",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "sinon": "^7.1.1"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
