@@ -15,10 +15,13 @@ describe('API V1 Routes', () => {
 		describe('GET /red-flags', () => {
 			it('should get all red-flag records', (done) => {
 				request.get(baseUrl, (err, res, body) => {
+					body = JSON.parse(body);
 					expect(res.statusCode).to.eq(200);
 					expect(res.headers['content-type']).to.contain('application/json');
 					expect(body.status).to.eq(200);
-					expect(body.data[1].comment).to.contain('Flood in High-level, Makurdi');
+					body.data.forEach(item => {
+						expect(item.type).to.eq('red-flag');
+					});
 					done();
 				})
 			});
