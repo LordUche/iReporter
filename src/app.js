@@ -59,6 +59,42 @@ app.post('/api/v1/red-flags', (req, res) => {
 	}
 });
 
+app.put('/api/v1/red-flags/:id/location', (req, res) => {
+	const data = redFlags.filter(incident => incident.id == req.params.id);
+	const index = fakeDatabase.incidents.indexOf(data[0]);
+	
+	if (data.length) {
+		fakeDatabase.incidents[index].location = req.body.location;
+		res.status(200).json({
+			status: 200,
+			data: [{
+				id: data[0].id,
+				message: "Updated red-flag record's location"
+			}]
+		});
+	} else {
+		res.status(404).json({ status: 404, error: 'That record does not exist' })
+	}
+});
+
+app.put('/api/v1/red-flags/:id/comment', (req, res) => {
+	const data = redFlags.filter(incident => incident.id == req.params.id);
+	const index = fakeDatabase.incidents.indexOf(data[0]);
+
+	if (data.length) {
+		fakeDatabase.incidents[index].comment = req.body.comment;
+		res.status(200).json({
+			status: 200,
+			data: [{
+				id: data[0].id,
+				message: "Updated red-flag record's comment"
+			}]
+		});
+	} else {
+		res.status(404).json({ status: 404, error: 'That record does not exist' })
+	}
+});
+
 app.listen(3000, () => {
 	console.log('Server started on port 3000...');
 })
