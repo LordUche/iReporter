@@ -42,7 +42,7 @@ describe('API V1 Routes', () => {
 
 			it('should throw error if the record is not found', (done) => {
 				request.get(`${baseUrl}/999`, (err, res, body) => {
-					body = JSON.parse(body)
+					body = JSON.parse(body);
 					expect(res.statusCode).to.eq(404);
 					expect(res.headers['content-type']).to.contain('application/json');
 					expect(body.status).to.eq(404);
