@@ -114,6 +114,6 @@ app.delete('/api/v1/red-flags/:id', (req, res) => {
 	}
 });
 
-app.listen(3000, () => {
-	console.log('Server started on port 3000...');
+app.listen(process.env.PORT || 3000, () => {
+	console.log('Server started on port ', process.env.PORT || 3000,'...');
 })
