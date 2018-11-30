@@ -95,6 +95,25 @@ app.put('/api/v1/red-flags/:id/comment', (req, res) => {
 	}
 });
 
+app.delete('/api/v1/red-flags/:id', (req, res) => {
+	const data = redFlags.filter(incident => incident.id == req.params.id);
+	const index = fakeDatabase.incidents.indexOf(data[0]);
+	console.log(data);
+
+	if (data.length) {
+		fakeDatabase.incidents.splice(index, 1);
+		res.status(200).json({
+			status: 200,
+			data: [{
+				id: data[0].id,
+				message: 'Deleted red-flag record'
+			}]
+		});
+	} else {
+		res.status(404).json({ status: 404, error: 'That record does not exist' })
+	}
+});
+
 app.listen(3000, () => {
 	console.log('Server started on port 3000...');
 })

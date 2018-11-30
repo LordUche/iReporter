@@ -165,9 +165,10 @@ describe('API V1 Routes', () => {
 		describe('DELETE /red-flags/:id', () => {
 			it('should delete a specific red-flag record', (done) => {
 				request.delete(`${baseUrl}/3`, (err, res, body) => {
-					expect(res.statusCode).to.eq(204);
+					body = JSON.parse(body);
+					expect(res.statusCode).to.eq(200);
 					expect(res.headers['content-type']).to.contain('application/json');
-					expect(body.status).to.eq(204);
+					expect(body.status).to.eq(200);
 					expect(body.data[0].id).to.eq(3);
 					expect(body.data[0].message).to.contain('Deleted red-flag record');
 					done();
@@ -176,6 +177,7 @@ describe('API V1 Routes', () => {
 
 			it('should throw error if the record is not found', (done) => {
 				request.delete(`${baseUrl}/999`, (err, res, body) => {
+					body = JSON.parse(body);
 					expect(res.statusCode).to.eq(404);
 					expect(res.headers['content-type']).to.contain('application/json');
 					expect(body.status).to.eq(404);
