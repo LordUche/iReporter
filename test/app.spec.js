@@ -98,14 +98,14 @@ describe('API V1 Routes', () => {
 			it('should update the location of a specific red-flag record', (done) => {
 				const options = {
 					body: { location: 'Lat: 7.7153984, Lon: 8.5085982' },
-					url: `${baseUrl}/2/location`,
+					url: `${baseUrl}/1/location`,
 					json: true,
 				};
 				request.put(options, (err, res, body) => {
 					expect(res.statusCode).to.eq(200);
 					expect(res.headers['content-type']).to.contain('application/json');
 					expect(body.status).to.eq(200);
-					expect(body.data[0].id).to.eq(2);
+					expect(body.data[0].id).to.eq(1);
 					expect(body.data[0].message).to.eq("Updated red-flag record's location");
 					done();
 				});
@@ -131,15 +131,15 @@ describe('API V1 Routes', () => {
 		describe('PUT /red-flags/:id/comment', () => {
 			it('should update the comment of a specific red-flag record', (done) => {
 				const options = {
-					body: { comment: 'Flood in Makurdi town' },
-					url: `${baseUrl}/2/comment`,
+					body: { comment: 'Corruption in Makurdi town' },
+					url: `${baseUrl}/1/comment`,
 					json: true,
 				};
 				request.put(options, (err, res, body) => {
 					expect(res.statusCode).to.eq(200);
 					expect(res.headers['content-type']).to.contain('application/json');
 					expect(body.status).to.eq(200);
-					expect(body.data[0].id).to.eq(2);
+					expect(body.data[0].id).to.eq(1);
 					expect(body.data[0].message).to.eq("Updated red-flag record's comment");
 					done();
 				});
@@ -164,11 +164,11 @@ describe('API V1 Routes', () => {
 
 		describe('DELETE /red-flags/:id', () => {
 			it('should delete a specific red-flag record', (done) => {
-				request.delete(`${baseUrl}/2`, (err, res, body) => {
+				request.delete(`${baseUrl}/3`, (err, res, body) => {
 					expect(res.statusCode).to.eq(204);
 					expect(res.headers['content-type']).to.contain('application/json');
 					expect(body.status).to.eq(204);
-					expect(body.data[0].id).to.eq(2);
+					expect(body.data[0].id).to.eq(3);
 					expect(body.data[0].message).to.contain('Deleted red-flag record');
 					done();
 				});
