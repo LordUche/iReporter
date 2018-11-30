@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const redFlagFixtures = require('../spec/fixtures/red-flags.json');
+const redFlagFixtures = require('../test/fixtures/red-flags.json');
 
 
 const incidents = redFlagFixtures.all.success.body.data
