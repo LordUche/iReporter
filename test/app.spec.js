@@ -7,7 +7,7 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 describe('API V1 Routes', () => {
-	let rootUrl = `http://localhost:${process.env.PORT || 3000}/api/v1`;
+	let rootUrl = `https://shrouded-tor-69589.herokuapp.com/api/v1`;
 
 	describe('Red-flags', () => {
 		let baseUrl = `${rootUrl}/red-flags`;
