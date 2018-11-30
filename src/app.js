@@ -14,6 +14,11 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+app.get('/api/v1/red-flags', (req, res) => {
+	const data = fakeDatabase.incidents.filter(incident => incident.type === 'red-flag');
+	res.status(200).json({data, status: 200});
+});
+
 app.post('/api/v1/red-flags', (req, res) => {
 	const {location, comment, Images, Videos, createdBy} = req.body;
 	
@@ -30,7 +35,7 @@ app.post('/api/v1/red-flags', (req, res) => {
 			type: 'red-flag',
 			status: 'draft',
 			createdOn: new Date(),
-		})
+		});
 		
 		res.status(201).json({
 			status: 201,
@@ -40,7 +45,7 @@ app.post('/api/v1/red-flags', (req, res) => {
 			}]
 		});
 	} else {
-		return res.status(400).json({
+		res.status(400).json({
 			status: 400,
 			error: 'Failed to create record'
 		})
