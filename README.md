@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/LordUche/iReporter.svg?branch=master)](https://travis-ci.com/LordUche/iReporter)
+
 [![Coverage Status](https://coveralls.io/repos/github/LordUche/iReporter-API/badge.svg?branch=master)](https://coveralls.io/github/LordUche/iReporter-API?branch=master)
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/054a641313d6e835b289/test_coverage)](https://codeclimate.com/github/LordUche/iReporter-API/test_coverage)
