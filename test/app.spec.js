@@ -29,18 +29,20 @@ describe('API V1 Routes', () => {
 
 		describe('GET /red-flags/:id', () => {
 			it('should get a specific red-flag record', (done) => {
-				request.get(`${baseUrl}/2`, (err, res, body) => {
+				request.get(`${baseUrl}/1`, (err, res, body) => {
+					body = JSON.parse(body);
 					expect(res.statusCode).to.eq(200);
 					expect(res.headers['content-type']).to.contain('application/json');
 					expect(body.status).to.eq(200);
-					expect(body.data[0].id).to.eq(2);
-					expect(body.data[0].comment).to.contain('Flood in High-level, Makurdi');
+					expect(body.data[0].id).to.eq(1);
+					expect(body.data[0].comment).to.contain('Money laundry in High-level, Makurdi');
 					done();
 				})
 			});
 
 			it('should throw error if the record is not found', (done) => {
 				request.get(`${baseUrl}/999`, (err, res, body) => {
+					body = JSON.parse(body)
 					expect(res.statusCode).to.eq(404);
 					expect(res.headers['content-type']).to.contain('application/json');
 					expect(body.status).to.eq(404);

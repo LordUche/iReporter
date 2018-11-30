@@ -5,9 +5,8 @@ const redFlagFixtures = require('../test/fixtures/red-flags.json');
 
 
 const incidents = redFlagFixtures.all.success.body.data
-const fakeDatabase = {
-	incidents
-};
+const fakeDatabase = { incidents };
+const redFlags = fakeDatabase.incidents.filter(incident => incident.type === 'red-flag');
 
 const app = express();
 
@@ -15,8 +14,16 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.get('/api/v1/red-flags', (req, res) => {
-	const data = fakeDatabase.incidents.filter(incident => incident.type === 'red-flag');
-	res.status(200).json({data, status: 200});
+	res.status(200).json({ data: redFlags, status: 200 });
+});
+
+app.get('/api/v1/red-flags/:id', (req, res) => {
+	const data = redFlags.filter(incident => incident.id == req.params.id);
+	if (data.length) {
+		res.status(200).json({ data, status: 200 });
+	} else {
+		res.status(404).json({ status: 404, error: 'That record does not exist' })
+	}
 });
 
 app.post('/api/v1/red-flags', (req, res) => {
