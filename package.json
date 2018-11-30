@@ -5,8 +5,7 @@
   "main": "src/app.js",
   "scripts": {
     "start": "nodemon src/app.js",
-    "test": "jasmine-node spec --color",
-    "test:watch": "jasmine-node spec --autotest --watch . --color",
+    "test": "mocha",
     "lint:init": "eslint --init"
   },
   "repository": {
@@ -20,10 +19,12 @@
   },
   "homepage": "https://github.com/LordUche/iReporter-API#readme",
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "jasmine-node": "^1.16.2",
+    "mocha": "^5.2.0",
     "nodemon": "^1.18.7",
     "request": "^2.88.0",
     "sinon": "^7.1.1"
