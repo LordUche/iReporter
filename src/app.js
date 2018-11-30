@@ -98,7 +98,6 @@ app.put('/api/v1/red-flags/:id/comment', (req, res) => {
 app.delete('/api/v1/red-flags/:id', (req, res) => {
 	const data = redFlags.filter(incident => incident.id == req.params.id);
 	const index = fakeDatabase.incidents.indexOf(data[0]);
-	console.log(data);
 
 	if (data.length) {
 		fakeDatabase.incidents.splice(index, 1);
