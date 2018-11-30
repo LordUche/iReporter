@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/LordUche/iReporter.svg?branch=master)](https://travis-ci.com/LordUche/iReporter)
+[![Build Status](https://travis-ci.com/LordUche/iReporter-API.svg?branch=master)](https://travis-ci.com/LordUche/iReporter-API)
 
 [![Coverage Status](https://coveralls.io/repos/github/LordUche/iReporter-API/badge.svg?branch=master)](https://coveralls.io/github/LordUche/iReporter-API?branch=master)
 
