@@ -15,7 +15,7 @@ describe('API V1 Routes', () => {
 		describe('GET /red-flags', () => {
 			it('should get all red-flag records', (done) => {
 				request.get(baseUrl, (err, res, body) => {
-					// body = JSON.parse(body);
+					body = JSON.parse(body);
 					expect(res.statusCode).to.eq(200);
 					expect(res.headers['content-type']).to.contain('application/json');
 					expect(body.status).to.eq(200);
@@ -35,7 +35,6 @@ describe('API V1 Routes', () => {
 					expect(res.headers['content-type']).to.contain('application/json');
 					expect(body.status).to.eq(200);
 					expect(body.data[0].id).to.eq(1);
-					expect(body.data[0].comment).to.contain('Money laundry in High-level, Makurdi');
 					done();
 				})
 			});
@@ -190,8 +189,8 @@ describe('API V1 Routes', () => {
 	});
 });
 
-xdescribe('Stubbed API V1 Routes', () => {
-	let rootUrl = 'http://localhost:3000/api/v1';
+describe('Stubbed API V1 Routes', () => {
+	let rootUrl = `https://shrouded-tor-69589.herokuapp.com/api/v1`;
 	let successResponse;
 	let errorResponse;
 
