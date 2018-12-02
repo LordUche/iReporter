@@ -6,7 +6,7 @@ const redFlagFixtures = require('../test/fixtures/red-flags.json');
 
 const incidents = redFlagFixtures.all.success.body.data;
 const fakeDatabase = { incidents };
-const redFlags = fakeDatabase.incidents.filter(incident => incident.type === 'red-flag');
+const redFlags = fakeDatabase.incidents.filter(incident => incident.type == 'red-flag');
 
 const app = express();
 
