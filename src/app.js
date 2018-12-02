@@ -18,7 +18,7 @@ app.get('/api/v1/red-flags', (req, res) => {
 });
 
 app.get('/api/v1/red-flags/:id', (req, res) => {
-  const data = redFlags.filter(incident => incident.id === req.params.id);
+  const data = redFlags.filter(incident => incident.id == req.params.id);
   if (data.length) {
     res.status(200).json({ data, status: 200 });
   } else {
@@ -66,7 +66,7 @@ app.post('/api/v1/red-flags', (req, res) => {
 });
 
 app.put('/api/v1/red-flags/:id/location', (req, res) => {
-  const data = redFlags.filter(incident => incident.id === req.params.id);
+  const data = redFlags.filter(incident => incident.id == req.params.id);
   const index = fakeDatabase.incidents.indexOf(data[0]);
 
   if (data.length) {
@@ -84,7 +84,7 @@ app.put('/api/v1/red-flags/:id/location', (req, res) => {
 });
 
 app.put('/api/v1/red-flags/:id/comment', (req, res) => {
-  const data = redFlags.filter(incident => incident.id === req.params.id);
+  const data = redFlags.filter(incident => incident.id == req.params.id);
   const index = fakeDatabase.incidents.indexOf(data[0]);
 
   if (data.length) {
@@ -102,7 +102,7 @@ app.put('/api/v1/red-flags/:id/comment', (req, res) => {
 });
 
 app.delete('/api/v1/red-flags/:id', (req, res) => {
-  const data = redFlags.filter(incident => incident.id === req.params.id);
+  const data = redFlags.filter(incident => incident.id == req.params.id);
   const index = fakeDatabase.incidents.indexOf(data[0]);
 
   if (data.length) {
