@@ -64,6 +64,7 @@ button {
   border: 1px solid #333;
   border-radius: 4px;
   outline: none;
+  text-align: center;
 }
 
 .btn.primary,
