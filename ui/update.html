@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
+  <script src="./main.js" type="text/javascript" charset="utf-8" async defer></script>
 </head>
 
 <body>
@@ -55,7 +56,6 @@
             <option value="redflag">Red-flag</option>
             <option value="intervention" selected>Intervention</option>
           </select>
-
           <label for="comment">
             <i class="fa fa-comment"></i> Comment
           </label>
@@ -64,10 +64,8 @@
             <i class="fa fa-map-marker"></i> Location
           </label>
           <div class="fx-row">
-            <input type="text" name="latitude" id="latitude" placeholder="Latitude" value="7.7153986" class="col-1-2"
-                   disabled>
-            <input type="text" name="longitude" id="longitude" placeholder="Longitude" value="8.5085987" class="col-1-2"
-                   disabled>
+            <input type="text" name="latitude" id="latitude" placeholder="Latitude" value="7.7153986" class="col-1-2" disabled>
+            <input type="text" name="longitude" id="longitude" placeholder="Longitude" value="8.5085987" class="col-1-2" disabled>
           </div>
           <label for="images">
             <i class="fa fa-picture-o"></i> Photos of Incident
@@ -79,9 +77,9 @@
           <input type="file" name="videos" id="videos">
         </form>
         <div class="fx-row col mt-2">
-            <a href="./incident.html" class=" col-1-2 flex"><button class="error col">Cancel</button></a>
-            <a href="./profile.html" class=" col-1-2 flex"><button class="primary col" type="submit">Update</button></a>
-         </div>
+          <a href="./incident.html" class=" col-1-2 flex"><button class="error col">Cancel</button></a>
+          <a href="./profile.html" class=" col-1-2 flex"><button class="primary col" type="submit">Update</button></a>
+        </div>
       </section>
     </div>
   </main>
