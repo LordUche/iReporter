@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>iReport | Report Incident</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+  <header id="header">
+    <div class="container fx-row">
+      <a class="branding" href="../index.html">
+        <i class="fa fa-balance-scale fa-lg"></i>
+        <span class="brand-name">iReporter</span>
+      </a>
+      <nav>
+        <ul>
+          <li>
+            <a href="./report.html">
+              <button class="success">
+                <i class="fa fa-plus"></i>
+                Report Incident
+              </button>
+            </a>
+          </li>
+          <li class="active">
+            <a href="./profile.html">
+              <i class="fa fa-user-circle accent"></i> <span class="hide-m">uchennai</span>
+            </a>
+          </li>
+          <li><i class="fa fa-bell"></i></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <h1>Report Incident</h1>
+      <section>
+        <form class="fx-col" method="post">
+          <label for="type">Type of Incident</label>
+          <div class="fx-row">
+            <div class="col-1-6 tc"><i class="fa fa-info-circle"></i></div>
+            <div class="col-5-6 tl"><strong>red-flag</strong> <em>(an incident linked to corruption)</em> or
+              <strong>intervention</strong>
+              <em>(a call for a government agency to intervene e.g repair bad road sections collapsed bridges flooding
+                e.t.c)</em>
+            </div>
+          </div>
+          <select name="type" id="type">
+            <option value="" disabled selected>Select type...</option>
+            <option value="redflag">Red-flag</option>
+            <option value="intervention">Intervention</option>
+          </select>
+
+          <label for="comment">
+            <i class="fa fa-comment"></i> Comment
+          </label>
+          <textarea name="comment" id="comment" rows="2" maxlength="140" placeholder="Short description of the incident..."></textarea>
+          <label>
+            <i class="fa fa-map-marker"></i> Location
+          </label>
+          <div class="fx-row">
+            <input type="text" name="latitude" id="latitude" placeholder="Latitude" class="col-1-2">
+            <input type="text" name="longitude" id="longitude" placeholder="Longitude" class="col-1-2">
+          </div>
+          <label for="images">
+            <i class="fa fa-picture-o"></i> Photos of Incident
+          </label>
+          <input type="file" name="images" id="images">
+          <label for="videos">
+            <i class="fa fa-video-camera"></i> Videos of Incident
+          </label>
+          <input type="file" name="videos" id="videos">
+        </form>
+        <div class="fx-row col mt-2">
+            <a href="./profile.html" class=" col-1-2 flex"><button class="error col">Cancel</button></a>
+            <a href="./incident.html" class=" col-1-2 flex"><button class="primary col" type="submit">Report</button></a>
+         </div>
+      </section>
+    </div>
+  </main>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>iReporter | Incidents</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+  <header id="header">
+    <div class="container fx-row">
+      <a class="branding" href="../index.html">
+        <i class="fa fa-balance-scale fa-lg"></i>
+        <span class="brand-name">iReporter</span>
+      </a>
+      <nav>
+        <ul>
+          <li>
+            <a href="./report.html">
+              <button class="success">
+                <i class="fa fa-plus"></i>
+                Report Incident
+              </button>
+            </a>
+          </li>
+          <li class="active">
+            <a href="./profile.html">
+              <i class="fa fa-user-circle accent"></i> <span class="hide-m">uchennai</span>
+            </a>
+          </li>
+          <li><i class="fa fa-bell"></i></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <!-- Incident list -->
+      <section class="col">
+        <header class="fx-row ac between t-sm">
+          <h3 class="col-2-3m uppercase t-sm bold">Incidents</h3>
+          <div class="col-1-3m">
+            <label for="filter">Filter By</label>
+            <select id="filter col-1-2">
+              <option selected>None</option>
+              <option value="resolved">Resolved</option>
+              <option value="unresolved">Unresolved</option>
+              <option value="redflag">Red-flag</option>
+              <option value="intervention">Intervention</option>
+            </select>
+          </div>
+        </header>
+        <!-- Mobile -->
+        <section class="hide-l">
+          <div class="fx-row col">
+            <p class="flex t-xs col-3-4">Incident</p>
+            <p class="flex t-xs tc">Type</p>
+            <p class="flex t-xs tc">Status</p>
+          </div>
+          <div class="card fx-row ac col">
+            <span class="flex col-3-4"><a href="./incident.html">Flood in High-level, Makurdi</a></span>
+            <span class="flex tc"><i class="fa fa-exclamation-triangle warn"></i></span>
+            <span class="flex tc"><i class="fa fa-check success"></i></span>
+          </div>
+          <div class="card fx-row ac col">
+            <span class="flex col-3-4"><a href="./incident.html">Money laundry in Wuse II, Abuja</a></span>
+            <span class="flex tc"><i class="fa fa-flag error"></i></span>
+            <span class="flex tc"><i class="fa fa-eye accent"></i></span>
+          </div>
+          <div class="card fx-row ac col">
+            <span class="flex col-3-4"><a href="./incident.html">Pollution in Ogoni, Rivers State</a></span>
+            <span class="flex tc"><i class="fa fa-exclamation-triangle warn"></i></span>
+            <span class="flex tc"><i class="fa fa-close error"></i></span>
+          </div>
+        </section>
+        <!-- Desktop -->
+        <section class="hide-m">
+          <table class="col">
+            <thead>
+              <tr>
+                <th class="tl t-sm">Incident</th>
+                <th class="tl t-sm">Username</th>
+                <th class="tl t-sm">Type</th>
+                <th class="tl t-sm">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="./incident.html">Flood in High-level, Makurdi</a></td>
+                <td class="tl"><i class="fa fa-certificate gold"></i> uchennai</td>
+                <td class="tl"><i class="fa fa-exclamation-triangle warn"></i> intervention</td>
+                <td class="tl"><i class="fa fa-check success"></i> resolved</td>
+              </tr>
+              <tr>
+                <td><a href="./incident.html">Money laundry in Wuse II, Abuja</a></td>
+                <td class="tl"><i class="fa fa-certificate accent"></i> jameso</td>
+                <td class="tl"><i class="fa fa-flag error"></i> red-flag</td>
+                <td class="tl"><i class="fa fa-eye accent"></i> under investigation</td>
+              </tr>
+              <tr>
+                <td><a href="./incident.html">Pollution in Ogoni, Rivers State</a></td>
+                <td class="tl"><i class="fa fa-certificate silver"></i> fiona</td>
+                <td class="tl"><i class="fa fa-exclamation-triangle warn"></i> intervention</td>
+                <td class="tl"><i class="fa fa-close error"></i> rejected</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </section>
+    </div>
+  </main>
+</body>
+
+</html>
