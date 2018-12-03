@@ -5,9 +5,9 @@
   "main": "src/app.js",
   "scripts": {
     "start": "nodemon src/app.js",
-    "test": "nyc mocha --timeout=10000",
+    "test": "nyc mocha --timeout=3000 --exit",
     "test:watch": "nyc mocha --timeout=10000 --watch",
-    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint:init": "eslint --init"
   },
   "repository": {

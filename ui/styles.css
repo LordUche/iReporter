@@ -52,11 +52,13 @@ a {
   line-height: 36px;
 }
 
-a button {
+a.btn {
   text-decoration: none;
 }
 
+a.btn,
 button {
+  display: inline-block;
   line-height: 40px;
   font-size: 16px;
   border: 1px solid #333;
@@ -64,21 +66,25 @@ button {
   outline: none;
 }
 
+.btn.primary,
 button.primary {
   color: #fff;
   background-color: #4fb99f;
 }
 
+.btn.accent,
 button.accent {
   color: #fff;
   background-color: #112f41;
 }
 
+.btn.success,
 button.success {
   color: #fff;
   background-color: #068587;
 }
 
+.btn.error,
 button.error {
   color: #fff;
   background-color: #ed553b;
