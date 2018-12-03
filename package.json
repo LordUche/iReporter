@@ -8,7 +8,9 @@
     "test": "nyc mocha --timeout=3000 --exit",
     "test:watch": "nyc mocha --timeout=10000 --watch",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "lint:init": "eslint --init"
+    "cover": "istanbul cover _mocha",
+    "lint:init": "eslint --init",
+    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
@@ -27,6 +29,7 @@
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
+    "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
     "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^13.1.0",
