@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.com/LordUche/iReporter-API.svg?branch=master)](https://travis-ci.com/LordUche/iReporter-API)
-[![Coverage Status](https://coveralls.io/repos/github/LordUche/iReporter-API/badge.svg?branch=master)](https://coveralls.io/github/LordUche/iReporter-API?branch=master)
+[![Build Status](https://travis-ci.com/LordUche/iReporter.svg?branch=develop)](https://travis-ci.com/LordUche/iReporter)
+[![Coverage Status](https://coveralls.io/repos/github/LordUche/iReporter/badge.svg?branch=develop)](https://coveralls.io/github/LordUche/iReporter?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a476548a1612cc730256/maintainability)](https://codeclimate.com/github/LordUche/iReporter/maintainability)
 
 # iReporter
