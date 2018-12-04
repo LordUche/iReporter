@@ -7,8 +7,8 @@ process.env.NODE_ENV = 'test';
 chai.use(chaiHttp);
 
 describe('API V1 Routes', () => {
-  // const rootUrl = 'https://shrouded-tor-69589.herokuapp.com/api/v1';
-  const rootUrl = 'http://localhost:3000/api/v1';
+  const rootUrl = 'https://glacial-caverns-29493.herokuapp.com/api/v1';
+  // const rootUrl = 'http://localhost:3000/api/v1';
 
   describe('Red-flags', () => {
     const baseUrl = `${rootUrl}/red-flags`;
