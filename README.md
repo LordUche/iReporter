@@ -20,4 +20,4 @@ Base URL: https://shrouded-tor-69589.herokuapp.com/api/v1
 URL: https://lorduche.github.io/iReporter/
 
 ## Pivotal Tracker board
-URL: https://www.pivotaltracker.com/n/projects/2227534
+URL:  https://www.pivotaltracker.com/projects/2227534
