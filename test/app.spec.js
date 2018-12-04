@@ -1,15 +1,14 @@
-process.env.NODE_ENV = 'test';
-
 import request from 'request';
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
-import sinon from 'sinon';
-import redFlags from './fixtures/red-flags.json';
+
+process.env.NODE_ENV = 'test';
 
 chai.use(chaiHttp);
 
 describe('API V1 Routes', () => {
-  const rootUrl = 'https://shrouded-tor-69589.herokuapp.com/api/v1';
+  // const rootUrl = 'https://shrouded-tor-69589.herokuapp.com/api/v1';
+  const rootUrl = 'http://localhost:3000/api/v1';
 
   describe('Red-flags', () => {
     const baseUrl = `${rootUrl}/red-flags`;
@@ -95,14 +94,14 @@ describe('API V1 Routes', () => {
       });
     });
 
-    describe('PUT /red-flags/:id/location', () => {
+    describe('PATCH /red-flags/:id/location', () => {
       it('should update the location of a specific red-flag record', (done) => {
         const options = {
           body: { location: 'Lat: 7.7153984, Lon: 8.5085982' },
           url: `${baseUrl}/1/location`,
           json: true,
         };
-        request.put(options, (err, res, body) => {
+        request.patch(options, (err, res, body) => {
           expect(res.statusCode).to.eq(200);
           expect(res.headers['content-type']).to.contain('application/json');
           expect(body.status).to.eq(200);
@@ -118,7 +117,7 @@ describe('API V1 Routes', () => {
           url: `${baseUrl}/999/location`,
           json: true,
         };
-        request.put(options, (err, res, body) => {
+        request.patch(options, (err, res, body) => {
           expect(res.statusCode).to.eq(404);
           expect(res.headers['content-type']).to.contain('application/json');
           expect(body.status).to.eq(404);
@@ -129,14 +128,14 @@ describe('API V1 Routes', () => {
       });
     });
 
-    describe('PUT /red-flags/:id/comment', () => {
+    describe('PATCH /red-flags/:id/comment', () => {
       it('should update the comment of a specific red-flag record', (done) => {
         const options = {
           body: { comment: 'Corruption in Makurdi town' },
           url: `${baseUrl}/1/comment`,
           json: true,
         };
-        request.put(options, (err, res, body) => {
+        request.patch(options, (err, res, body) => {
           expect(res.statusCode).to.eq(200);
           expect(res.headers['content-type']).to.contain('application/json');
           expect(body.status).to.eq(200);
@@ -152,7 +151,7 @@ describe('API V1 Routes', () => {
           url: `${baseUrl}/999/comment`,
           json: true,
         };
-        request.put(options, (err, res, body) => {
+        request.patch(options, (err, res, body) => {
           expect(res.statusCode).to.eq(404);
           expect(res.headers['content-type']).to.contain('application/json');
           expect(body.status).to.eq(404);

@@ -4,9 +4,8 @@
   "description": "iReporter enables any/every citizen to bring any form of corruption to the notice of appropriate authorities and the general public. Users can also report on things that needs government intervention",
   "main": "src/app.js",
   "scripts": {
-    "start": "nodemon src/app.js",
-    "test": "env NODE_ENV=test nyc mocha --timeout=10000 --exit",
-    "test:watch": "nyc mocha --timeout=10000 --watch",
+    "start": "nodemon --exec babel-node src/app.js",
+    "test": "env NODE_ENV=test nyc --reporter=text mocha --timeout=10000 --exit",
     "coverage": "nyc report --reporter=lcov --reporter=text-lcov | coveralls",
     "lint:init": "eslint --init"
   },
@@ -51,6 +50,7 @@
     "require": [
       "@babel/register",
       "@babel/polyfill"
-    ]
+    ],
+    "include": ["src/**/*.js"]
   }
 }
