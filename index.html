@@ -8,10 +8,11 @@
   <title>iReporter | Welcome</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,900" rel="stylesheet">
   <link rel="stylesheet" href="./ui/styles.css">
 </head>
 
-<body>
+<body class="fx-col">
   <header id="header">
     <div class="container fx-row">
       <div class="branding col-1-2l">
@@ -20,23 +21,19 @@
       </div>
     </div>
   </header>
-  <main>
+  <main class="flex">
     <div class="container">
       <section class="welcome-page fx-row">
-        <section class="logo hide-m col-1-4">
-          <i class="fa fa-balance-scale"></i>
-        </section>
-        <section class="fx-col col-3-4l around">
+        <section class="fx-col">
           <h1>
             Welcome to iReporter
-            <hr class="mt-2">
           </h1>
           <p class="m2">iReporter enables you to bring any form of corruption to the notice of appropriate
             authorities and the
             general public. You can also report on things that needs government intervention</p>
-          <div class="m2">
-            <a href="./ui/signup.html" class="btn primary col-m">Join iReporter</a>
-            <a href="./ui/login.html" class="btn accent col-m">Already registered? Log in</a>
+          <div class="m2 tc">
+            <a href="./ui/signup.html" class="btn primary col-m ml-2 mr-2">Join iReporter</a>
+            <a href="./ui/login.html" class="btn accent col-m ml-2 mr-2">Already registered? Log in</a>
           </div>
         </section>
       </section>
@@ -62,6 +59,9 @@
       </section>
     </div>
   </main>
+  <footer id="#footer" class="flex tc">
+    <p>Copyright © 2018</p>
+  </footer>
 </body>
 
 </html>
