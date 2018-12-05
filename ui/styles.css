@@ -1,8 +1,8 @@
 html,
 body {
-  font-family: Raleway, sans-serif;
+  font-family: Nunito, Raleway, sans-serif;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 600;
   margin: 0;
   padding: 0;
   line-height: 1;
@@ -24,17 +24,18 @@ main {
   background-color: #f4f4f4;
   color: #333;
   padding: 16px;
-  min-height: calc(100vh - 44px);
+  min-height: calc(100vh - 144px);
 }
 
-h1,
+/*h1,
 h2,
 h3,
 h4,
 h5,
 h6,
+*/
+/*p,*/
 hr,
-p,
 ul,
 fieldset {
   margin: 0;
@@ -65,6 +66,7 @@ button {
   border-radius: 4px;
   outline: none;
   text-align: center;
+  padding: 0 10px;
 }
 
 .btn.primary,
@@ -184,14 +186,26 @@ tr:nth-child(odd) {
   text-decoration: none;
 }
 
+/* APP FOOTER */
+
+footer {
+  min-height: 100px;
+  /*line-height: 100px;*/
+  background-color: #112f41;
+  color: #fff;
+  /*padding: 20px;*/
+  border-top: 5px solid black;
+}
+
 /* APP SPECIFIC UI */
 
 .card {
   background-color: #fff;
   padding: 15px 5px;
   border-radius: 5px;
-  border: 1px solid #333;
+  /*border: 1px solid #333;*/
   margin: 5px 0;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, .3);
 }
 
 .card span:first-child {
@@ -206,17 +220,12 @@ tr:nth-child(odd) {
 .welcome-page h1 {
   font-size: 36px;
   font-weight: 600;
+  border-bottom: 1px solid #4fb99f;
 }
 
-.welcome-page hr {
-  border: none;
-  border-bottom: 1px solid #4fb99f;
-  width: 75px;
-  margin: 0 auto;
-}
 
 .welcome-page p {
-  font-size: 24px;
+  font-size: 20px;
   text-align: center;
 }
 
@@ -224,7 +233,7 @@ tr:nth-child(odd) {
 
 .container {
   width: 100%;
-  max-width: 960px;
+  max-width: 50em;
   margin: 0 auto;
 }
 
@@ -325,6 +334,19 @@ tr:nth-child(odd) {
   color: #999;
 }
 
+.white {
+  color: #fff;
+}
+
+.black {
+  color: #333;
+}
+
+.bg-black {
+  background-color: #333;
+  color: #fff;
+}
+
 /* TYPOGRAPHY */
 
 .title {
@@ -349,6 +371,7 @@ tr:nth-child(odd) {
   font-size: 13px;
   font-weight: 600;
   line-height: 16px;
+  margin: 0;
 }
 
 .t-xs {
