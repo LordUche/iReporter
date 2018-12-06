@@ -4,12 +4,20 @@ import RedFlag from '../models/redFlag';
 const redFlags = incidents.filter(incident => incident.type == 'red-flag');
 
 export default class RedFlagsController {
-  static index(req, res, next) {
+  /**
+   * 
+   *
+   * @static
+   * @param {object} req - Request Object
+   * @param {*} res
+   * @memberof RedFlagsController
+   */
+  static index(req, res) {
     res.status(200).json({ data: redFlags, status: 200 });
   }
 
   static get(req, res, next) {
-    const data = redFlags.filter(redFlag => redFlag.id == req.params.id);
+    const data = redFlags.filter(redFlag => redFlag.id === parseInt(req.params.id, 10));
     if (data.length > 0) {
       res.status(200).json({ data, status: 200 });
     } else {
