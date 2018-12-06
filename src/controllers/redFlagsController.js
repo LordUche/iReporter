@@ -10,6 +10,7 @@ const redFlags = incidents.filter(incident => incident.type === 'red-flag');
  */
 export default class RedFlagsController {
   /**
+<<<<<<< HEAD
    * Gets all red-flag records
    *
    * @static
