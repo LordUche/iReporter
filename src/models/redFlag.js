@@ -1,4 +1,24 @@
+/**
+ * Red Flag
+ *
+ * @export
+ * @class RedFlag
+ */
 export default class RedFlag {
+  /**
+   *Creates an instance of RedFlag.
+   * @param {*} {
+   *     createdBy,
+   *     location,
+   *     comment,
+   *     Images = [],
+   *     Videos = [],
+   *     id = null,
+   *     status = 'draft',
+   *     createdOn = null,
+   *   }
+   * @memberof RedFlag
+   */
   constructor({
     createdBy,
     location,
