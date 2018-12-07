@@ -1,25 +1,28 @@
-import incidents from '../utils/fakeDb';
-import RedFlag from '../models/red-flag.model';
+import IncidentsQuery from "../utils/database/incident.queries";
 
-const redFlags = incidents.filter(incident => incident.type === 'red-flag');
 /**
- * Red Flags Controller
+ * Incidents Controller
  *
  * @export
- * @class RedFlagsController
+ * @class IncidentsController
  */
-export default class RedFlagsController {
+export default class IncidentsController {
   /**
-<<<<<<< HEAD
-   * Gets all red-flag records
+   * Index action gets all red-flag records
    *
    * @static
    * @param {object} req Request object
    * @param {object} res Response object
+   * @param {Function} next A function that passes data to the next middleware
    * @memberof RedFlagsController
    */
-  static index(req, res) {
-    res.status(200).json({ data: redFlags, status: 200 });
+  static index(req, res, next) {
+    const { type } = req.params;
+    IncidentsQuery.getAll(type.slice(0, -1))
+      .then(data => {
+        res.status(200).json({ status: 200, data });
+      })
+      .catch(err => next({ status: 500, error: err.message }));
   }
 
   /**
@@ -32,12 +35,14 @@ export default class RedFlagsController {
    * @memberof RedFlagsController
    */
   static get(req, res, next) {
-    const data = redFlags.filter(redFlag => redFlag.id === parseInt(req.params.id, 10));
-    if (data.length > 0) {
-      res.status(200).json({ data, status: 200 });
-    } else {
-      next({ status: 404, error: 'That record does not exist' });
-    }
+    const { type, id } = req.params;
+    IncidentsQuery.get(type.slice(0, -1), parseInt(id, 10))
+      .then(data => {
+        res.status(200).json({ data, status: 200 });
+      })
+      .catch(err => {
+        next({ status: 404, error: err.message });
+      });
   }
 
   /**
@@ -50,31 +55,19 @@ export default class RedFlagsController {
    * @memberof RedFlagsController
    */
   static create(req, res, next) {
-    const {
-      location, comment, Images, Videos, createdBy,
-    } = req.body;
-
-    if (location && comment && createdBy) {
-      const id = Math.floor(Math.random() * 100000);
-      incidents.push(
-        new RedFlag({
-          id,
-          comment,
-          location,
-          createdBy,
-          Images,
-          Videos,
-          createdOn: new Date(),
-        }),
-      );
-
-      res.status(201).json({
-        status: 201,
-        data: [{ id, message: 'Created red-flag record' }],
+    const { type } = req.params;
+    IncidentsQuery.create(type.slice(0, -1), req.body)
+      .then(data => {
+        res.status(201).json({
+          status: 201,
+          data: [
+            { id: data.id, message: `Created ${type.slice(0, -1)} record` }
+          ]
+        });
+      })
+      .catch(err => {
+        next({ status: 400, error: err.message });
       });
-    } else {
-      next({ status: 400, error: 'Failed to create record' });
-    }
   }
 
   /**
@@ -86,78 +79,47 @@ export default class RedFlagsController {
    * @param {Function} next A function that passes data to the next middleware
    * @memberof RedFlagsController
    */
-  static updateLocation(req, res, next) {
-    const index = incidents.findIndex(redFlag => redFlag.id === parseInt(req.params.id, 10));
-
-    if (index >= 0) {
-      incidents[index].location = req.body.location;
-      res.status(200).json({
-        status: 200,
-        data: [
-          {
-            id: incidents[index].id,
-            message: "Updated red-flag record's location",
-          },
-        ],
+  static update(req, res, next) {
+    const { type, id, field } = req.params;
+    IncidentsQuery.update(
+      type.slice(0, -1),
+      parseInt(id, 10),
+      field.slice(0, -1),
+      req.body
+    )
+      .then(data => {
+        res.status(200).json({
+          status: 200,
+          data: [
+            {
+              id: data.id,
+              message: `Updated ${type.slice(0, -1)} record's location`
+            }
+          ]
+        });
+      })
+      .catch(err => {
+        next({ status: 404, error: err.message });
       });
-    } else {
-      next({ status: 404, error: 'That record does not exist' });
-    }
   }
 
-  /**
-   * Updates a specific red-flag's comment
-   *
-   * @static
-   * @param {object} req Request object
-   * @param {object} res Response object
-   * @param {Function} next A function that passes data to the next middleware
-   * @memberof RedFlagsController
-   */
-  static updateComment(req, res, next) {
-    const index = incidents.findIndex(redFlag => redFlag.id === parseInt(req.params.id, 10));
-
-    if (index >= 0) {
-      incidents[index].comment = req.body.comment;
-      res.status(200).json({
-        status: 200,
-        data: [
-          {
-            id: incidents[index].id,
-            message: "Updated red-flag record's comment",
-          },
-        ],
-      });
-    } else {
-      next({ status: 404, error: 'That record does not exist' });
-    }
-  }
-
-  /**
-   * Delete a specific red-flag record
-   *
-   * @static
-   * @param {object} req Request object
-   * @param {object} res Response object
-   * @param {Function} next A function that passes data to the next middleware
-   * @memberof RedFlagsController
-   */
   static delete(req, res, next) {
-    const index = incidents.findIndex(redFlag => redFlag.id === parseInt(req.params.id, 10));
+    const { type, id } = req.params;
 
-    if (index >= 0) {
-      incidents.splice(index, 1);
-      res.status(200).json({
-        status: 200,
-        data: [
-          {
-            id: parseInt(req.params.id, 10),
-            message: 'Deleted red-flag record',
-          },
-        ],
+    IncidentsQuery.delete(type.slice(0, -1), parseInt(id, 10))
+      .then(data => {
+        res.status(200).json({
+          status: 200,
+          data: [
+            {
+              id: data.id,
+              message: `Deleted ${type.slice(0, -1)} record`
+            }
+          ]
+        });
+      })
+      .catch(err => {
+        next({ status: 404, error: err.message });
       });
-    } else {
-      next({ status: 404, error: 'That record does not exist' });
-    }
   }
 }

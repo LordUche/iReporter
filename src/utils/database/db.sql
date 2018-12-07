@@ -33,10 +33,12 @@ CREATE TABLE incidents (
   createdOn timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   createdBy int references users(ID),
   type incidentType NOT NULL,
-  location location NOT NULL,
+  location varchar NOT NULL,
   status status NOT NULL DEFAULT 'draft',
-  Images varchar[],
-  Videos varchar[],
+  Images varchar[] DEFAULT '{}',
+  Videos varchar[] DEFAULT '{}',
   comment varchar NOT NULL
 );
 
+INSERT INTO users(firstname, lastname, email, phoneNumber, username)
+VALUES('Uchenna', 'Iheanacho', 'uchennai@live.com', '08099851353', 'LordUche');
