@@ -1,5 +1,5 @@
 import incidents from '../utils/fakeDb';
-import RedFlag from '../models/redFlag';
+import RedFlag from '../models/red-flag.model';
 
 const redFlags = incidents.filter(incident => incident.type == 'red-flag');
 
