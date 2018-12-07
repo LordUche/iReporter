@@ -14,7 +14,8 @@ describe('API V1 Routes', () => {
 
     describe('GET /red-flags', () => {
       it('should get all red-flag records', (done) => {
-        chai.request(server)
+        chai
+          .request(server)
           .get(baseUrl)
           .end((err, res) => {
             expect(res.statusCode).to.eq(200);
@@ -30,7 +31,8 @@ describe('API V1 Routes', () => {
 
     describe('GET /red-flags/:id', () => {
       it('should get a specific red-flag record', (done) => {
-        chai.request(server)
+        chai
+          .request(server)
           .get(`${baseUrl}/1`)
           .end((err, res) => {
             expect(res.statusCode).to.eq(200);
@@ -42,14 +44,15 @@ describe('API V1 Routes', () => {
       });
 
       it('should throw error if the record is not found', (done) => {
-        chai.request(server)
+        chai
+          .request(server)
           .get(`${baseUrl}/999`)
           .end((err, res) => {
             expect(res.statusCode).to.eq(404);
             expect(res.headers['content-type']).to.contain('application/json');
             expect(res.body.status).to.eq(404);
             expect(res.body.data).to.be.undefined;
-            expect(res.body.error).to.contain('That record does not exist');
+            expect(res.body.error).to.be.a('string');
             done();
           });
       });
@@ -62,7 +65,8 @@ describe('API V1 Routes', () => {
           comment: 'Bribery in Federal High Court, Makurdi',
           createdBy: 1,
         };
-        chai.request(server)
+        chai
+          .request(server)
           .post(baseUrl)
           .send(redFlag)
           .end((err, res) => {
@@ -80,7 +84,8 @@ describe('API V1 Routes', () => {
           location: '',
           createdBy: 1,
         };
-        chai.request(server)
+        chai
+          .request(server)
           .post(baseUrl)
           .send(redFlag)
           .end((err, res) => {
@@ -88,7 +93,7 @@ describe('API V1 Routes', () => {
             expect(res.headers['content-type']).to.contain('application/json');
             expect(res.body.status).to.eq(400);
             expect(res.body.data).to.be.undefined;
-            expect(res.body.error).to.contain('Failed to create record');
+            expect(res.body.error).to.be.a('string');
             done();
           });
       });
@@ -98,7 +103,8 @@ describe('API V1 Routes', () => {
       it('should update the location of a specific red-flag record', (done) => {
         const location = { location: 'Lat: 7.7153984, Lon: 8.5085982' };
 
-        chai.request(server)
+        chai
+          .request(server)
           .patch(`${baseUrl}/1/location`)
           .send(location)
           .end((err, res) => {
@@ -114,7 +120,8 @@ describe('API V1 Routes', () => {
       it('should throw error if the record is not found', (done) => {
         const location = { location: 'Lat: 7.7153984, Lon: 8.5085982' };
 
-        chai.request(server)
+        chai
+          .request(server)
           .patch(`${baseUrl}/999/location`)
           .send(location)
           .end((err, res) => {
@@ -122,7 +129,7 @@ describe('API V1 Routes', () => {
             expect(res.headers['content-type']).to.contain('application/json');
             expect(res.body.status).to.eq(404);
             expect(res.body.data).to.be.undefined;
-            expect(res.body.error).to.contain('That record does not exist');
+            expect(res.body.error).to.be.a('string');
             done();
           });
       });
@@ -132,7 +139,8 @@ describe('API V1 Routes', () => {
       it('should update the comment of a specific red-flag record', (done) => {
         const comment = { comment: 'Corruption in Makurdi town' };
 
-        chai.request(server)
+        chai
+          .request(server)
           .patch(`${baseUrl}/1/comment`)
           .send(comment)
           .end((err, res) => {
@@ -148,7 +156,8 @@ describe('API V1 Routes', () => {
       it('should throw error if the record is not found', (done) => {
         const comment = { comment: 'Lat: 7.7153984, Lon: 8.5085982' };
 
-        chai.request(server)
+        chai
+          .request(server)
           .patch(`${baseUrl}/999/comment`)
           .send(comment)
           .end((err, res) => {
@@ -156,7 +165,7 @@ describe('API V1 Routes', () => {
             expect(res.headers['content-type']).to.contain('application/json');
             expect(res.body.status).to.eq(404);
             expect(res.body.data).to.be.undefined;
-            expect(res.body.error).to.contain('That record does not exist');
+            expect(res.body.error).to.be.a('string');
             done();
           });
       });
@@ -164,7 +173,8 @@ describe('API V1 Routes', () => {
 
     describe('DELETE /red-flags/:id', () => {
       it('should delete a specific red-flag record', (done) => {
-        chai.request(server)
+        chai
+          .request(server)
           .delete(`${baseUrl}/3`)
           .end((err, res) => {
             expect(res.statusCode).to.eq(200);
@@ -177,14 +187,15 @@ describe('API V1 Routes', () => {
       });
 
       it('should throw error if the record is not found', (done) => {
-        chai.request(server)
+        chai
+          .request(server)
           .delete(`${baseUrl}/999`)
           .end((err, res) => {
             expect(res.statusCode).to.eq(404);
             expect(res.headers['content-type']).to.contain('application/json');
             expect(res.body.status).to.eq(404);
             expect(res.body.data).to.be.undefined;
-            expect(res.body.error).to.contain('That record does not exist');
+            expect(res.body.error).to.be.a('string');
             done();
           });
       });
