@@ -10,7 +10,6 @@ const redFlags = incidents.filter(incident => incident.type === 'red-flag');
  */
 export default class RedFlagsController {
   /**
-<<<<<<< HEAD
    * Gets all red-flag records
    *
    * @static
@@ -87,7 +86,8 @@ export default class RedFlagsController {
    * @memberof RedFlagsController
    */
   static updateLocation(req, res, next) {
-    const index = incidents.findIndex(redFlag => redFlag.id === parseInt(req.params.id, 10));
+    const index = incidents
+      .findIndex(redFlag => redFlag.id === parseInt(req.params.id, 10));
 
     if (index >= 0) {
       incidents[index].location = req.body.location;
@@ -115,7 +115,8 @@ export default class RedFlagsController {
    * @memberof RedFlagsController
    */
   static updateComment(req, res, next) {
-    const index = incidents.findIndex(redFlag => redFlag.id === parseInt(req.params.id, 10));
+    const index = incidents
+      .findIndex(redFlag => redFlag.id === parseInt(req.params.id, 10));
 
     if (index >= 0) {
       incidents[index].comment = req.body.comment;
