@@ -10,7 +10,6 @@ const redFlags = incidents.filter(incident => incident.type === 'red-flag');
  */
 export default class RedFlagsController {
   /**
-<<<<<<< HEAD
    * Gets all red-flag records
    *
    * @static
@@ -36,7 +35,7 @@ export default class RedFlagsController {
     if (data.length > 0) {
       res.status(200).json({ data, status: 200 });
     } else {
-      next({ status: 404, error: 'That record does not exist' });
+      next({ status: 404, error: 'That route does not exist' });
     }
   }
 
@@ -73,7 +72,7 @@ export default class RedFlagsController {
         data: [{ id, message: 'Created red-flag record' }],
       });
     } else {
-      next({ status: 400, error: 'Failed to create record' });
+      next({ status: 400, error: 'Please supply the location, comment and createdBy id' });
     }
   }
 
@@ -90,6 +89,9 @@ export default class RedFlagsController {
     const index = incidents.findIndex(redFlag => redFlag.id === parseInt(req.params.id, 10));
 
     if (index >= 0) {
+      if (!req.body.location.trim()) {
+        return next({ status: 404, error: 'Please enter a location' });
+      }
       incidents[index].location = req.body.location;
       res.status(200).json({
         status: 200,
@@ -101,7 +103,7 @@ export default class RedFlagsController {
         ],
       });
     } else {
-      next({ status: 404, error: 'That record does not exist' });
+      next({ status: 404, error: 'That route does not exist' });
     }
   }
 
@@ -118,6 +120,9 @@ export default class RedFlagsController {
     const index = incidents.findIndex(redFlag => redFlag.id === parseInt(req.params.id, 10));
 
     if (index >= 0) {
+      if (!req.body.comment.trim()) {
+        return next({ status: 404, error: 'Please enter a comment' });
+      }
       incidents[index].comment = req.body.comment;
       res.status(200).json({
         status: 200,
@@ -129,7 +134,7 @@ export default class RedFlagsController {
         ],
       });
     } else {
-      next({ status: 404, error: 'That record does not exist' });
+      next({ status: 404, error: 'That route does not exist' });
     }
   }
 
@@ -157,7 +162,7 @@ export default class RedFlagsController {
         ],
       });
     } else {
-      next({ status: 404, error: 'That record does not exist' });
+      next({ status: 404, error: 'That route does not exist' });
     }
   }
 }
