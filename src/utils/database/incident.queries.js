@@ -22,7 +22,7 @@ export default class IncidentsQuery {
 
   static update(type, id, field, data) {
     return db.one(
-      "UPDATE incidents SET($1) VALUES($2) WHERE type=$3 AND id=$4",
+      "UPDATE incidents SET comment=$1 WHERE type=$3 AND id=$4",
       [field, data[field], type, id]
     );
   }

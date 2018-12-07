@@ -99,7 +99,7 @@ export default class IncidentsController {
         });
       })
       .catch(err => {
-        next({ status: 404, error: err.message });
+        next({ status: 400, error: err });
       });
   }
 

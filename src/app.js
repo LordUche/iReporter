@@ -12,7 +12,7 @@ app.use("/api/v1", routes);
 app.all("*", (req, res) =>
   res.status(404).json({ status: 404, error: "Not Found!" })
 );
-app.use((err, req, res, next) => res.status(err.status).json(err));
+app.use((err, req, res, next) => res.status(err.status).json(err.message));
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Server started on port ${process.env.PORT || 3000}...`);
