@@ -42,3 +42,6 @@ CREATE TABLE incidents (
 
 INSERT INTO users(firstname, lastname, email, phoneNumber, username)
 VALUES('Uchenna', 'Iheanacho', 'uchennai@live.com', '08099851353', 'LordUche');
+
+INSERT INTO users(firstname, lastname, email, phoneNumber, username, isAdmin)
+VALUES('Mohammed', 'Isioye', 'isioye.mohammed@andela.com', '07014970830', 'mosdef', true);

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import IncidentsController from "../controllers/red-flags.controller";
+import IncidentsController from "../controllers/incidents.controller";
 
 const router = new Router();
 
