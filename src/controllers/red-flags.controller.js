@@ -1,5 +1,5 @@
 import incidents from '../utils/fakeDb';
-import RedFlag from '../models/redFlag';
+import RedFlag from '../models/red-flag.model';
 
 const redFlags = incidents.filter(incident => incident.type === 'red-flag');
 /**
@@ -30,12 +30,12 @@ export default class RedFlagsController {
    * @param {Function} next A function that passes data to the next middleware
    * @memberof RedFlagsController
    */
-  static get(req, res, next) {
+  static get(req, res) {
     const data = redFlags.filter(redFlag => redFlag.id === parseInt(req.params.id, 10));
     if (data.length > 0) {
       res.status(200).json({ data, status: 200 });
     } else {
-      next({ status: 404, error: 'That route does not exist' });
+      res.status(404).json({ status: 404, error: 'That route does not exist' });
     }
   }
 
@@ -48,12 +48,12 @@ export default class RedFlagsController {
    * @param {Function} next A function that passes data to the next middleware
    * @memberof RedFlagsController
    */
-  static create(req, res, next) {
+  static create(req, res) {
     const {
       location, comment, Images, Videos, createdBy,
     } = req.body;
 
-    if (location && comment && createdBy) {
+    if (location.trim() && comment.trim() && !isNaN(createdBy)) {
       const id = Math.floor(Math.random() * 100000);
       incidents.push(
         new RedFlag({
@@ -72,7 +72,9 @@ export default class RedFlagsController {
         data: [{ id, message: 'Created red-flag record' }],
       });
     } else {
-      next({ status: 400, error: 'Please supply the location, comment and createdBy id' });
+      res
+        .status(400)
+        .json({ status: 400, error: 'Please supply the location, comment and createdBy id' });
     }
   }
 
@@ -85,15 +87,15 @@ export default class RedFlagsController {
    * @param {Function} next A function that passes data to the next middleware
    * @memberof RedFlagsController
    */
-  static updateLocation(req, res, next) {
+  static updateLocation(req, res) {
     const index = incidents.findIndex(redFlag => redFlag.id === parseInt(req.params.id, 10));
 
     if (index >= 0) {
       if (!req.body.location.trim()) {
-        return next({ status: 404, error: 'Please enter a location' });
+        return res.status(400).json({ status: 400, error: 'Please enter a location' });
       }
       incidents[index].location = req.body.location;
-      res.status(200).json({
+      return res.status(200).json({
         status: 200,
         data: [
           {
@@ -102,9 +104,8 @@ export default class RedFlagsController {
           },
         ],
       });
-    } else {
-      next({ status: 404, error: 'That route does not exist' });
     }
+    return res.status(404).json({ status: 404, error: 'That route does not exist' });
   }
 
   /**
@@ -121,10 +122,10 @@ export default class RedFlagsController {
 
     if (index >= 0) {
       if (!req.body.comment.trim()) {
-        return next({ status: 404, error: 'Please enter a comment' });
+        return res.status(400).json({ status: 400, error: 'Please enter a comment' });
       }
       incidents[index].comment = req.body.comment;
-      res.status(200).json({
+      return res.status(200).json({
         status: 200,
         data: [
           {
@@ -133,9 +134,8 @@ export default class RedFlagsController {
           },
         ],
       });
-    } else {
-      next({ status: 404, error: 'That route does not exist' });
     }
+    return res.status(404).json({ status: 404, error: 'That route does not exist' });
   }
 
   /**
@@ -147,7 +147,7 @@ export default class RedFlagsController {
    * @param {Function} next A function that passes data to the next middleware
    * @memberof RedFlagsController
    */
-  static delete(req, res, next) {
+  static delete(req, res) {
     const index = incidents.findIndex(redFlag => redFlag.id === parseInt(req.params.id, 10));
 
     if (index >= 0) {
@@ -162,7 +162,7 @@ export default class RedFlagsController {
         ],
       });
     } else {
-      next({ status: 404, error: 'That route does not exist' });
+      res.status(404).json({ status: 404, error: 'That route does not exist' });
     }
   }
 }
