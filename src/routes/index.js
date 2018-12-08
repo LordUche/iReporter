@@ -1,3 +1,3 @@
-import router from "./incidents.routes";
+import routes from './red-flags.routes';
 
-export default router;
+export default routes;
