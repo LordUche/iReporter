@@ -7,10 +7,6 @@ CREATE DATABASE ireporter;
 
 CREATE TYPE incidentType AS ENUM ('red-flag', 'intervention');
 CREATE TYPE status AS ENUM ('draft', 'under investigation', 'rejected', 'resolved');
-CREATE TYPE location AS (
-   latitude decimal,
-   longitude decimal
-);
 
 --  USERS TABLE
 
