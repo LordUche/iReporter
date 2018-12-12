@@ -1,8 +1,20 @@
+import dotenv from 'dotenv';
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../src/app';
+import { hashPassword, signToken } from '../src/utils/helpers';
+import {
+  createIncidentsTable,
+  createUsersTable,
+  dropTable,
+  insertUser,
+  insertAdmin,
+} from '../src/utils/database/queries/queries';
+import redFlagsQuery from '../src/utils/database/queries/red-flags.queries';
 
+dotenv.config();
 process.env.NODE_ENV = 'test';
+process.env.PORT = 3001;
 
 chai.use(chaiHttp);
 
@@ -11,35 +23,97 @@ describe('API V1 Routes', () => {
 
   describe('Red-flags', () => {
     const baseUrl = `${rootUrl}/red-flags`;
+    const type = 'red-flag';
+    let createdBy;
+    let token;
+    let good;
+
+    before(async () => {
+      await dropTable('incidents');
+      await dropTable('users');
+      await createUsersTable();
+      const data = await insertUser({
+        firstname: 'Uchenna',
+        lastname: 'Iheanacho',
+        othernames: 'Andrew',
+        email: 'uchennai@live.com',
+        phoneNumber: '08099851353',
+        username: 'lorduche',
+        passwordHash: hashPassword('123456', 10),
+      });
+      token = signToken(data);
+      createdBy = data.id;
+      good = {
+        location: '7.7153986, 8.5085987',
+        status: 'under investigation',
+        comment: 'Money laundry in High-level, Makurdi',
+        createdOn: '2018-02-15T00:00:00.000Z',
+        Images: [],
+        Videos: [],
+        type,
+        createdBy,
+      };
+    });
+
+    afterEach(async () => {
+      await dropTable('incidents');
+    });
 
     describe('GET /red-flags', () => {
-      it('should get all red-flag records', (done) => {
+      before(async () => {
+        await dropTable('incidents');
+        await createIncidentsTable();
+      });
+
+      it('should get all red-flag records', async () => {
         chai
           .request(server)
           .get(baseUrl)
+          .set('access-token', token)
+          .send()
           .end((err, res) => {
             expect(res.statusCode).to.eq(200);
             expect(res.headers['content-type']).to.contain('application/json');
             expect(res.body.status).to.eq(200);
+            expect(res.body.data).to.be.an('Array');
+            expect(res.body.data.length).to.eq(0);
+          });
+
+        await redFlagsQuery.create(good);
+        await redFlagsQuery.create(good);
+
+        chai
+          .request(server)
+          .get(baseUrl)
+          .set('access-token', token)
+          .send()
+          .end((err, res) => {
+            expect(res.body.data.length).to.eq(2);
             res.body.data.forEach((item) => {
               expect(item.type).to.eq('red-flag');
             });
-            done();
           });
       });
     });
 
     describe('GET /red-flags/:id', () => {
-      it('should get a specific red-flag record', (done) => {
+      let redFlag;
+      before(async () => {
+        await createIncidentsTable();
+        redFlag = await redFlagsQuery.create(good);
+      });
+
+      it('should get a specific red-flag record', async () => {
         chai
           .request(server)
-          .get(`${baseUrl}/1`)
+          .get(`${baseUrl}/${redFlag.id}`)
+          .set('access-token', token)
+          .send()
           .end((err, res) => {
             expect(res.statusCode).to.eq(200);
             expect(res.headers['content-type']).to.contain('application/json');
             expect(res.body.status).to.eq(200);
             expect(res.body.data[0].id).to.eq(1);
-            done();
           });
       });
 
@@ -47,6 +121,8 @@ describe('API V1 Routes', () => {
         chai
           .request(server)
           .get(`${baseUrl}/999`)
+          .set('access-token', token)
+          .send()
           .end((err, res) => {
             expect(res.statusCode).to.eq(404);
             expect(res.headers['content-type']).to.contain('application/json');
@@ -59,16 +135,19 @@ describe('API V1 Routes', () => {
     });
 
     describe('POST /red-flags', () => {
+      before(async () => {
+        await createIncidentsTable();
+      });
+      after(async () => {
+        await dropTable('incidents');
+      });
+
       it('should create a new red-flag record', (done) => {
-        const redFlag = {
-          location: 'Lat: 7.7153986, Lon: 8.5085987',
-          comment: 'Bribery in Federal High Court, Makurdi',
-          createdBy: 1,
-        };
         chai
           .request(server)
           .post(baseUrl)
-          .send(redFlag)
+          .set('access-token', token)
+          .send(good)
           .end((err, res) => {
             expect(res.statusCode).to.eq(201);
             expect(res.headers['content-type']).to.contain('application/json');
@@ -82,11 +161,12 @@ describe('API V1 Routes', () => {
       it('should throw error if the request body is invalid', (done) => {
         const redFlag = {
           location: '',
-          createdBy: 1,
+          comment: 'Hello',
         };
         chai
           .request(server)
           .post(baseUrl)
+          .set('access-token', token)
           .send(redFlag)
           .end((err, res) => {
             expect(res.statusCode).to.eq(400);
@@ -100,29 +180,42 @@ describe('API V1 Routes', () => {
     });
 
     describe('PATCH /red-flags/:id/location', () => {
+      let redFlag;
+
+      before(async () => {
+        await createIncidentsTable();
+        redFlag = await redFlagsQuery.create(good);
+      });
+
+      after(async () => {
+        await dropTable('incidents');
+      });
+
       it('should update the location of a specific red-flag record', (done) => {
-        const location = { location: 'Lat: 7.7153984, Lon: 8.5085982' };
+        const location = { location: '7.7153984, 8.5085982' };
 
         chai
           .request(server)
-          .patch(`${baseUrl}/1/location`)
+          .patch(`${baseUrl}/${redFlag.id}/location`)
+          .set('access-token', token)
           .send(location)
           .end((err, res) => {
             expect(res.statusCode).to.eq(200);
             expect(res.headers['content-type']).to.contain('application/json');
             expect(res.body.status).to.eq(200);
-            expect(res.body.data[0].id).to.eq(1);
+            expect(res.body.data[0].id).to.eq(redFlag.id);
             expect(res.body.data[0].message).to.eq("Updated red-flag record's location");
             done();
           });
       });
 
       it('should throw error if the record is not found', (done) => {
-        const location = { location: 'Lat: 7.7153984, Lon: 8.5085982' };
+        const location = { location: '7.7153984, 8.5085982' };
 
         chai
           .request(server)
           .patch(`${baseUrl}/999/location`)
+          .set('access-token', token)
           .send(location)
           .end((err, res) => {
             expect(res.statusCode).to.eq(404);
@@ -136,18 +229,30 @@ describe('API V1 Routes', () => {
     });
 
     describe('PATCH /red-flags/:id/comment', () => {
+      let redFlag;
+
+      before(async () => {
+        await createIncidentsTable();
+        redFlag = await redFlagsQuery.create(good);
+      });
+
+      after(async () => {
+        await dropTable('incidents');
+      });
+
       it('should update the comment of a specific red-flag record', (done) => {
         const comment = { comment: 'Corruption in Makurdi town' };
 
         chai
           .request(server)
-          .patch(`${baseUrl}/1/comment`)
+          .patch(`${baseUrl}/${redFlag.id}/comment`)
+          .set('access-token', token)
           .send(comment)
           .end((err, res) => {
             expect(res.statusCode).to.eq(200);
             expect(res.headers['content-type']).to.contain('application/json');
             expect(res.body.status).to.eq(200);
-            expect(res.body.data[0].id).to.eq(1);
+            expect(res.body.data[0].id).to.eq(redFlag.id);
             expect(res.body.data[0].message).to.eq("Updated red-flag record's comment");
             done();
           });
@@ -159,6 +264,7 @@ describe('API V1 Routes', () => {
         chai
           .request(server)
           .patch(`${baseUrl}/999/comment`)
+          .set('access-token', token)
           .send(comment)
           .end((err, res) => {
             expect(res.statusCode).to.eq(404);
@@ -172,15 +278,27 @@ describe('API V1 Routes', () => {
     });
 
     describe('DELETE /red-flags/:id', () => {
+      let redFlag;
+
+      before(async () => {
+        await createIncidentsTable();
+        redFlag = await redFlagsQuery.create(good);
+      });
+
+      after(async () => {
+        await dropTable('incidents');
+      });
+
       it('should delete a specific red-flag record', (done) => {
         chai
           .request(server)
-          .delete(`${baseUrl}/3`)
+          .delete(`${baseUrl}/${redFlag.id}`)
+          .set('access-token', token)
           .end((err, res) => {
             expect(res.statusCode).to.eq(200);
             expect(res.headers['content-type']).to.contain('application/json');
             expect(res.body.status).to.eq(200);
-            expect(res.body.data[0].id).to.eq(3);
+            expect(res.body.data[0].id).to.eq(redFlag.id);
             expect(res.body.data[0].message).to.contain('Deleted red-flag record');
             done();
           });
@@ -190,6 +308,7 @@ describe('API V1 Routes', () => {
         chai
           .request(server)
           .delete(`${baseUrl}/999`)
+          .set('access-token', token)
           .end((err, res) => {
             expect(res.statusCode).to.eq(404);
             expect(res.headers['content-type']).to.contain('application/json');

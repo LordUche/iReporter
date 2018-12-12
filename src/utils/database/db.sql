@@ -3,7 +3,7 @@ CREATE DATABASE ireporter;
 
 \c ireporter;
 
--- CUSTOM TYPES 
+-- CUSTOM TYPES
 
 CREATE TYPE incidentType AS ENUM ('red-flag', 'intervention');
 CREATE TYPE status AS ENUM ('draft', 'under investigation', 'rejected', 'resolved');
@@ -19,7 +19,8 @@ CREATE TABLE users (
   phoneNumber varchar NOT NULL UNIQUE,
   username varchar NOT NULL UNIQUE,
   registered timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  isAdmin boolean NOT NULL DEFAULT false
+  isAdmin boolean NOT NULL DEFAULT false,
+  passwordHash varchar NOT NULL
 );
 
 -- INCIDENTS TABLE
@@ -27,7 +28,7 @@ CREATE TABLE users (
 CREATE TABLE incidents (
   ID serial PRIMARY KEY,
   createdOn timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  createdBy int references users(ID),
+  createdBy int references users(ID) NOT NULL,
   type incidentType NOT NULL,
   location varchar NOT NULL,
   status status NOT NULL DEFAULT 'draft',
@@ -35,9 +36,3 @@ CREATE TABLE incidents (
   Videos varchar[] DEFAULT '{}',
   comment varchar NOT NULL
 );
-
-INSERT INTO users(firstname, lastname, email, phoneNumber, username)
-VALUES('Uchenna', 'Iheanacho', 'uchennai@live.com', '08099851353', 'LordUche');
-
-INSERT INTO users(firstname, lastname, email, phoneNumber, username, isAdmin)
-VALUES('Mohammed', 'Isioye', 'isioye.mohammed@andela.com', '07014970830', 'mosdef', true);

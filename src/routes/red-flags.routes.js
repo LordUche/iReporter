@@ -1,13 +1,14 @@
 import { Router } from 'express';
-import RedFlagsController from '../controllers/red-flags.controller';
+import controller from '../controllers/red-flags.controller';
+import { validateLocation, validateComment } from '../middleware/validators';
 
 const router = new Router();
 
-router.get('/red-flags', RedFlagsController.index);
-router.get('/red-flags/:id', RedFlagsController.get);
-router.post('/red-flags', RedFlagsController.create);
-router.patch('/red-flags/:id/location', RedFlagsController.updateLocation);
-router.patch('/red-flags/:id/comment', RedFlagsController.updateComment);
-router.delete('/red-flags/:id', RedFlagsController.delete);
+router.get('/', controller.index);
+router.get('/:id(\\d+)', controller.get);
+router.post('/', validateLocation, validateComment, controller.create);
+router.patch('/:id(\\d+)/location', validateLocation, controller.updateLocation);
+router.patch('/:id(\\d+)/comment', validateComment, controller.updateComment);
+router.delete('/:id(\\d+)', controller.delete);
 
 export default router;
