@@ -9,7 +9,7 @@
     "prebuild": "rm -rf build/*",
     "build": "babel -d ./build ./src",
     "serve": "nodemon --exec babel-node src/app.js",
-    "test": "env NODE_ENV=test nyc --reporter=text mocha --timeout=10000 --exit",
+    "test": "env NODE_ENV=test nyc --reporter=text mocha ./test/**/*.spec.js --timeout=10000 --exit",
     "coverage": "nyc report --reporter=lcov --reporter=text-lcov | coveralls",
     "cover": "nyc report --reporter=lcov --reporter=text-lcov",
     "lint:init": "eslint --init",

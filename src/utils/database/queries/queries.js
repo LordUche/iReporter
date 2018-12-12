@@ -34,8 +34,10 @@ export const insertUser = user => db.one(
   'INSERT INTO users (firstname, lastname, othernames, email, phoneNumber, username, passwordHash) VALUES (${firstname}, ${lastname}, ${othernames}, ${email}, ${phoneNumber}, ${username}, ${passwordHash}) RETURNING *',
   user,
 );
-
+export const getUser = user => db.one('SELECT * FROM users LIMIT 1');
 export const insertAdmin = user => db.one(
   'INSERT INTO users (firstname, lastname, othernames, email, phoneNumber, username, passwordHash, isAdmin) VALUES (${firstname}, ${lastname}, ${othernames}, ${email}, ${phoneNumber}, ${username}, ${passwordHash}, true) RETURNING *',
   user,
 );
+
+export const deleteAll = relation => db.none(`DELETE FROM ${relation}`);

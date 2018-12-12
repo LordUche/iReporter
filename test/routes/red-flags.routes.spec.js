@@ -1,27 +1,22 @@
+/* eslint-disable no-unused-expressions */
 import dotenv from 'dotenv';
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
-import server from '../src/app';
-import { hashPassword, signToken } from '../src/utils/helpers';
-import {
-  createIncidentsTable,
-  createUsersTable,
-  dropTable,
-  insertUser,
-  insertAdmin,
-} from '../src/utils/database/queries/queries';
-import redFlagsQuery from '../src/utils/database/queries/red-flags.queries';
+import server from '../../src/app';
+import { hashPassword, signToken } from '../../src/utils/helpers';
+import { deleteAll, insertUser } from '../../src/utils/database/queries/queries';
+import redFlagsQuery from '../../src/utils/database/queries/red-flags.queries';
+
 
 dotenv.config();
 process.env.NODE_ENV = 'test';
-process.env.PORT = 3001;
 
 chai.use(chaiHttp);
 
 describe('API V1 Routes', () => {
   const rootUrl = '/api/v1';
 
-  describe('Red-flags', () => {
+  describe('Red-flags', async () => {
     const baseUrl = `${rootUrl}/red-flags`;
     const type = 'red-flag';
     let createdBy;
@@ -29,9 +24,8 @@ describe('API V1 Routes', () => {
     let good;
 
     before(async () => {
-      await dropTable('incidents');
-      await dropTable('users');
-      await createUsersTable();
+      await deleteAll('incidents');
+      await deleteAll('users');
       const data = await insertUser({
         firstname: 'Uchenna',
         lastname: 'Iheanacho',
@@ -55,17 +49,11 @@ describe('API V1 Routes', () => {
       };
     });
 
-    afterEach(async () => {
-      await dropTable('incidents');
-    });
-
     describe('GET /red-flags', () => {
-      before(async () => {
-        await dropTable('incidents');
-        await createIncidentsTable();
-      });
-
       it('should get all red-flag records', async () => {
+        await redFlagsQuery.create(good);
+        await redFlagsQuery.create(good);
+        
         chai
           .request(server)
           .get(baseUrl)
@@ -76,19 +64,7 @@ describe('API V1 Routes', () => {
             expect(res.headers['content-type']).to.contain('application/json');
             expect(res.body.status).to.eq(200);
             expect(res.body.data).to.be.an('Array');
-            expect(res.body.data.length).to.eq(0);
-          });
-
-        await redFlagsQuery.create(good);
-        await redFlagsQuery.create(good);
-
-        chai
-          .request(server)
-          .get(baseUrl)
-          .set('access-token', token)
-          .send()
-          .end((err, res) => {
-            expect(res.body.data.length).to.eq(2);
+            expect(res.body.data.length).to.be.gte(2);
             res.body.data.forEach((item) => {
               expect(item.type).to.eq('red-flag');
             });
@@ -99,7 +75,6 @@ describe('API V1 Routes', () => {
     describe('GET /red-flags/:id', () => {
       let redFlag;
       before(async () => {
-        await createIncidentsTable();
         redFlag = await redFlagsQuery.create(good);
       });
 
@@ -113,7 +88,7 @@ describe('API V1 Routes', () => {
             expect(res.statusCode).to.eq(200);
             expect(res.headers['content-type']).to.contain('application/json');
             expect(res.body.status).to.eq(200);
-            expect(res.body.data[0].id).to.eq(1);
+            expect(res.body.data[0].id).to.eq(redFlag.id);
           });
       });
 
@@ -135,13 +110,6 @@ describe('API V1 Routes', () => {
     });
 
     describe('POST /red-flags', () => {
-      before(async () => {
-        await createIncidentsTable();
-      });
-      after(async () => {
-        await dropTable('incidents');
-      });
-
       it('should create a new red-flag record', (done) => {
         chai
           .request(server)
@@ -183,12 +151,7 @@ describe('API V1 Routes', () => {
       let redFlag;
 
       before(async () => {
-        await createIncidentsTable();
         redFlag = await redFlagsQuery.create(good);
-      });
-
-      after(async () => {
-        await dropTable('incidents');
       });
 
       it('should update the location of a specific red-flag record', (done) => {
@@ -232,12 +195,7 @@ describe('API V1 Routes', () => {
       let redFlag;
 
       before(async () => {
-        await createIncidentsTable();
         redFlag = await redFlagsQuery.create(good);
-      });
-
-      after(async () => {
-        await dropTable('incidents');
       });
 
       it('should update the comment of a specific red-flag record', (done) => {
@@ -281,12 +239,7 @@ describe('API V1 Routes', () => {
       let redFlag;
 
       before(async () => {
-        await createIncidentsTable();
         redFlag = await redFlagsQuery.create(good);
-      });
-
-      after(async () => {
-        await dropTable('incidents');
       });
 
       it('should delete a specific red-flag record', (done) => {
