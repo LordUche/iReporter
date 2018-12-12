@@ -2,7 +2,8 @@ language: node_js
 node_js:
   - node
 before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
+  # - psql -c 'create database travis_ci_test;' -U postgres
+  - psql -f ./src/utils/database/db.sql -U postgres
 after_success:
   - npm run coverage
 deploy:
