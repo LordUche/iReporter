@@ -1,4 +1,4 @@
-release: psql -c `-- CUSTOM TYPES
+web: psql -- CUSTOM TYPES
 
 CREATE TYPE incidentType AS ENUM ('red-flag', 'intervention');
 CREATE TYPE status AS ENUM ('draft', 'under investigation', 'rejected', 'resolved');
@@ -31,4 +31,3 @@ CREATE TABLE incidents (
   Videos varchar[] DEFAULT '{}',
   comment varchar NOT NULL
 );
-`
