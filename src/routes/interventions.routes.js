@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import controller from '../controllers/red-flags.controller';
+import controller from '../controllers/interventions.controller';
 import { validateLocation, validateComment, validateStatus } from '../middleware/validators';
 import { isAdmin } from '../middleware/auth';
 

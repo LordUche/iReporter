@@ -5,7 +5,7 @@ import chaiHttp from 'chai-http';
 import server from '../../src/app';
 import { hashPassword, signToken } from '../../src/utils/helpers';
 import { deleteAll } from '../../src/utils/database/queries/queries';
-import RedFlagsQuery from '../../src/utils/database/queries/red-flags.queries';
+import InterventionsQuery from '../../src/utils/database/queries/interventions.queries';
 import UsersQuery from '../../src/utils/database/queries/users.queries';
 
 
@@ -17,9 +17,9 @@ chai.use(chaiHttp);
 describe('API V1 Routes', () => {
   const rootUrl = '/api/v1';
 
-  describe('Red-flags', () => {
-    const baseUrl = `${rootUrl}/red-flags`;
-    const type = 'red-flag';
+  describe('Interventions', () => {
+    const baseUrl = `${rootUrl}/interventions`;
+    const type = 'intervention';
     let createdBy;
     let token;
     let good;
@@ -50,10 +50,10 @@ describe('API V1 Routes', () => {
       };
     });
 
-    describe('GET /red-flags', () => {
-      it('should get all red-flag records', async () => {
-        await RedFlagsQuery.create(good);
-        await RedFlagsQuery.create(good);
+    describe('GET /interventions', () => {
+      it('should get all intervention records', async () => {
+        await InterventionsQuery.create(good);
+        await InterventionsQuery.create(good);
 
         chai
           .request(server)
@@ -67,19 +67,19 @@ describe('API V1 Routes', () => {
             expect(res.body.data).to.be.an('Array');
             expect(res.body.data.length).to.be.gte(2);
             res.body.data.forEach((item) => {
-              expect(item.type).to.eq('red-flag');
+              expect(item.type).to.eq('intervention');
             });
           });
       });
     });
 
-    describe('GET /red-flags/:id', () => {
+    describe('GET /interventions/:id', () => {
       let redFlag;
       before(async () => {
-        redFlag = await RedFlagsQuery.create(good);
+        redFlag = await InterventionsQuery.create(good);
       });
 
-      it('should get a specific red-flag record', async () => {
+      it('should get a specific intervention record', async () => {
         chai
           .request(server)
           .get(`${baseUrl}/${redFlag.id}`)
@@ -110,8 +110,8 @@ describe('API V1 Routes', () => {
       });
     });
 
-    describe('POST /red-flags', () => {
-      it('should create a new red-flag record', (done) => {
+    describe('POST /interventions', () => {
+      it('should create a new intervention record', (done) => {
         chai
           .request(server)
           .post(baseUrl)
@@ -122,7 +122,7 @@ describe('API V1 Routes', () => {
             expect(res.headers['content-type']).to.contain('application/json');
             expect(res.body.status).to.eq(201);
             expect(res.body.data[0].id).not.to.be.undefined;
-            expect(res.body.data[0].message).to.contain('Created red-flag record');
+            expect(res.body.data[0].message).to.contain('Created intervention record');
             done();
           });
       });
@@ -148,14 +148,14 @@ describe('API V1 Routes', () => {
       });
     });
 
-    describe('PATCH /red-flags/:id/location', () => {
+    describe('PATCH /interventions/:id/location', () => {
       let redFlag;
 
       before(async () => {
-        redFlag = await RedFlagsQuery.create(good);
+        redFlag = await InterventionsQuery.create(good);
       });
 
-      it('should update the location of a specific red-flag record', (done) => {
+      it('should update the location of a specific intervention record', (done) => {
         const location = { location: '7.7153984, 8.5085982' };
 
         chai
@@ -168,7 +168,7 @@ describe('API V1 Routes', () => {
             expect(res.headers['content-type']).to.contain('application/json');
             expect(res.body.status).to.eq(200);
             expect(res.body.data[0].id).to.eq(redFlag.id);
-            expect(res.body.data[0].message).to.eq("Updated red-flag record's location");
+            expect(res.body.data[0].message).to.eq("Updated intervention record's location");
             done();
           });
       });
@@ -192,14 +192,14 @@ describe('API V1 Routes', () => {
       });
     });
 
-    describe('PATCH /red-flags/:id/comment', () => {
+    describe('PATCH /interventions/:id/comment', () => {
       let redFlag;
 
       before(async () => {
-        redFlag = await RedFlagsQuery.create(good);
+        redFlag = await InterventionsQuery.create(good);
       });
 
-      it('should update the comment of a specific red-flag record', (done) => {
+      it('should update the comment of a specific intervention record', (done) => {
         const comment = { comment: 'Corruption in Makurdi town' };
 
         chai
@@ -212,7 +212,7 @@ describe('API V1 Routes', () => {
             expect(res.headers['content-type']).to.contain('application/json');
             expect(res.body.status).to.eq(200);
             expect(res.body.data[0].id).to.eq(redFlag.id);
-            expect(res.body.data[0].message).to.eq("Updated red-flag record's comment");
+            expect(res.body.data[0].message).to.eq("Updated intervention record's comment");
             done();
           });
       });
@@ -236,14 +236,14 @@ describe('API V1 Routes', () => {
       });
     });
 
-    describe('DELETE /red-flags/:id', () => {
+    describe('DELETE /interventions/:id', () => {
       let redFlag;
 
       before(async () => {
-        redFlag = await RedFlagsQuery.create(good);
+        redFlag = await InterventionsQuery.create(good);
       });
 
-      it('should delete a specific red-flag record', (done) => {
+      it('should delete a specific intervention record', (done) => {
         chai
           .request(server)
           .delete(`${baseUrl}/${redFlag.id}`)
@@ -253,7 +253,7 @@ describe('API V1 Routes', () => {
             expect(res.headers['content-type']).to.contain('application/json');
             expect(res.body.status).to.eq(200);
             expect(res.body.data[0].id).to.eq(redFlag.id);
-            expect(res.body.data[0].message).to.contain('Deleted red-flag record');
+            expect(res.body.data[0].message).to.contain('Deleted intervention record');
             done();
           });
       });
