@@ -9,7 +9,7 @@ export default class UsersController {
       .create({ ...new User(req.body), passwordHash })
       .then((user) => {
         const token = signToken(user);
-        res.status(200).json({ status: 200, data: [{ token, user }] });
+        res.status(201).json({ status: 201, data: [{ token, user }] });
       })
       .catch((err) => {
         res.status(400).json({ status: 400, error: err.message });

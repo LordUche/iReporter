@@ -4,8 +4,9 @@ import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../../src/app';
 import { hashPassword, signToken } from '../../src/utils/helpers';
-import { deleteAll, insertUser } from '../../src/utils/database/queries/queries';
-import redFlagsQuery from '../../src/utils/database/queries/red-flags.queries';
+import { deleteAll } from '../../src/utils/database/queries/queries';
+import RedFlagsQuery from '../../src/utils/database/queries/red-flags.queries';
+import UsersQuery from '../../src/utils/database/queries/users.queries';
 
 
 dotenv.config();
@@ -16,7 +17,7 @@ chai.use(chaiHttp);
 describe('API V1 Routes', () => {
   const rootUrl = '/api/v1';
 
-  describe('Red-flags', async () => {
+  describe('Red-flags', () => {
     const baseUrl = `${rootUrl}/red-flags`;
     const type = 'red-flag';
     let createdBy;
@@ -26,14 +27,14 @@ describe('API V1 Routes', () => {
     before(async () => {
       await deleteAll('incidents');
       await deleteAll('users');
-      const data = await insertUser({
+      const data = await UsersQuery.create({
         firstname: 'Uchenna',
         lastname: 'Iheanacho',
         othernames: 'Andrew',
         email: 'uchennai@live.com',
         phoneNumber: '08099851353',
         username: 'lorduche',
-        passwordHash: hashPassword('123456', 10),
+        passwordHash: hashPassword('123456'),
       });
       token = signToken(data);
       createdBy = data.id;
@@ -51,9 +52,9 @@ describe('API V1 Routes', () => {
 
     describe('GET /red-flags', () => {
       it('should get all red-flag records', async () => {
-        await redFlagsQuery.create(good);
-        await redFlagsQuery.create(good);
-        
+        await RedFlagsQuery.create(good);
+        await RedFlagsQuery.create(good);
+
         chai
           .request(server)
           .get(baseUrl)
@@ -75,7 +76,7 @@ describe('API V1 Routes', () => {
     describe('GET /red-flags/:id', () => {
       let redFlag;
       before(async () => {
-        redFlag = await redFlagsQuery.create(good);
+        redFlag = await RedFlagsQuery.create(good);
       });
 
       it('should get a specific red-flag record', async () => {
@@ -151,7 +152,7 @@ describe('API V1 Routes', () => {
       let redFlag;
 
       before(async () => {
-        redFlag = await redFlagsQuery.create(good);
+        redFlag = await RedFlagsQuery.create(good);
       });
 
       it('should update the location of a specific red-flag record', (done) => {
@@ -195,7 +196,7 @@ describe('API V1 Routes', () => {
       let redFlag;
 
       before(async () => {
-        redFlag = await redFlagsQuery.create(good);
+        redFlag = await RedFlagsQuery.create(good);
       });
 
       it('should update the comment of a specific red-flag record', (done) => {
@@ -239,7 +240,7 @@ describe('API V1 Routes', () => {
       let redFlag;
 
       before(async () => {
-        redFlag = await redFlagsQuery.create(good);
+        redFlag = await RedFlagsQuery.create(good);
       });
 
       it('should delete a specific red-flag record', (done) => {
