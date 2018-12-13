@@ -6,7 +6,7 @@
 iReporter enables any/every citizen to bring any form of corruption to the notice of appropriate authorities and the general public. Users can also report on things that needs government intervention
 
 ## Heroku endpoints
-Base URL: https://shrouded-tor-69589.herokuapp.com/api/v1/red-flags
+Base URL: https://uche-ireporter.herokuapp.com/api/v1/red-flags
 
 ### Red-flags endpoints
 * POST /red-flags               -    _Create a red-flag record_
