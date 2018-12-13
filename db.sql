@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS incidents;
+DROP TABLE IF EXISTS users;
+
 -- CUSTOM TYPES
 
 CREATE TYPE incidentType AS ENUM ('red-flag', 'intervention');
@@ -31,3 +34,6 @@ CREATE TABLE incidents (
   Videos varchar[] DEFAULT '{}',
   comment varchar NOT NULL
 );
+
+INSERT INTO users (firstname, lastname, othernames, email, phoneNumber, username, passwordHash, isAdmin)
+VALUES('Uchenna', 'Iheanacho', 'A.', 'uchennai@live.com', '08099851353', 'lorduche', '$2b$10$EWcx.GVvDBBgOHlYR7243ON2H4wKy/nIvmrt3ZkBHj1qzIcdkT5m2', true);
