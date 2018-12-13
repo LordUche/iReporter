@@ -4,8 +4,6 @@ import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../../src/app';
 import { deleteAll } from '../../src/utils/database/queries/queries';
-import UsersQuery from '../../src/utils/database/queries/users.queries';
-import { hashPassword } from '../../src/utils/helpers';
 
 dotenv.config();
 process.env.NODE_ENV = 'test';

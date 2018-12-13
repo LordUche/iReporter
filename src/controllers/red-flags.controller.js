@@ -20,7 +20,7 @@ export default class RedFlagsController {
         res.status(200).json({ status: 200, data: [{ ...data }] });
       })
       .catch((err) => {
-        res.status(404).json({ status: 404, error: err.message });
+        res.status(500).json({ status: 500, error: err.message });
       });
   }
 
@@ -34,7 +34,7 @@ export default class RedFlagsController {
           .json({ status: 201, data: [{ ...data, message: 'Created red-flag record' }] });
       })
       .catch((err) => {
-        res.status(400).json({ status: 400, error: err.message });
+        res.status(500).json({ status: 500, error: err.message });
       });
   }
 
@@ -49,7 +49,7 @@ export default class RedFlagsController {
         });
       })
       .catch((err) => {
-        res.status(404).json({ status: 404, error: err.message });
+        res.status(500).json({ status: 500, error: err.message });
       });
   }
 
@@ -58,15 +58,13 @@ export default class RedFlagsController {
     return redFlags
       .updateComment(parseInt(req.params.id, 10), comment)
       .then((data) => {
-        res
-          .status(200)
-          .json({
-            status: 200,
-            data: [{ ...data, message: "Updated red-flag record's comment" }],
-          });
+        res.status(200).json({
+          status: 200,
+          data: [{ ...data, message: "Updated red-flag record's comment" }],
+        });
       })
       .catch((err) => {
-        res.status(404).json({ status: 404, error: err.message });
+        res.status(500).json({ status: 500, error: err.message });
       });
   }
 
@@ -79,7 +77,7 @@ export default class RedFlagsController {
           .json({ status: 200, data: [{ ...data, message: 'Deleted red-flag record' }] });
       })
       .catch((err) => {
-        res.status(404).json({ status: 404, error: err.message });
+        res.status(500).json({ status: 500, error: err.message });
       });
   }
 }

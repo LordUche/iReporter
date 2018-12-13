@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import redFlagRoutes from './red-flags.routes';
 import usersRoutes from './users.routes';
-import verifyToken from '../middleware/auth';
+import { verifyToken } from '../middleware/auth';
 
 const router = new Router();
 

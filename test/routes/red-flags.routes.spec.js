@@ -100,9 +100,9 @@ describe('API V1 Routes', () => {
           .set('access-token', token)
           .send()
           .end((err, res) => {
-            expect(res.statusCode).to.eq(404);
+            expect(res.statusCode).to.eq(500);
             expect(res.headers['content-type']).to.contain('application/json');
-            expect(res.body.status).to.eq(404);
+            expect(res.body.status).to.eq(500);
             expect(res.body.data).to.be.undefined;
             expect(res.body.error).to.be.a('string');
             done();
@@ -182,9 +182,9 @@ describe('API V1 Routes', () => {
           .set('access-token', token)
           .send(location)
           .end((err, res) => {
-            expect(res.statusCode).to.eq(404);
+            expect(res.statusCode).to.eq(500);
             expect(res.headers['content-type']).to.contain('application/json');
-            expect(res.body.status).to.eq(404);
+            expect(res.body.status).to.eq(500);
             expect(res.body.data).to.be.undefined;
             expect(res.body.error).to.be.a('string');
             done();
@@ -226,9 +226,9 @@ describe('API V1 Routes', () => {
           .set('access-token', token)
           .send(comment)
           .end((err, res) => {
-            expect(res.statusCode).to.eq(404);
+            expect(res.statusCode).to.eq(500);
             expect(res.headers['content-type']).to.contain('application/json');
-            expect(res.body.status).to.eq(404);
+            expect(res.body.status).to.eq(500);
             expect(res.body.data).to.be.undefined;
             expect(res.body.error).to.be.a('string');
             done();
@@ -264,9 +264,9 @@ describe('API V1 Routes', () => {
           .delete(`${baseUrl}/999`)
           .set('access-token', token)
           .end((err, res) => {
-            expect(res.statusCode).to.eq(404);
+            expect(res.statusCode).to.eq(500);
             expect(res.headers['content-type']).to.contain('application/json');
-            expect(res.body.status).to.eq(404);
+            expect(res.body.status).to.eq(500);
             expect(res.body.data).to.be.undefined;
             expect(res.body.error).to.be.a('string');
             done();
