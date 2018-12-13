@@ -34,6 +34,7 @@ export default class RedFlagsController {
           .json({ status: 201, data: [{ ...data, message: 'Created red-flag record' }] });
       })
       .catch((err) => {
+        console.log(err);
         res.status(500).json({ status: 500, error: err.message });
       });
   }

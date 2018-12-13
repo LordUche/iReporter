@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
+import { getIncident } from '../utils/database/queries/queries';
 
 dotenv.config();
 
@@ -23,9 +24,20 @@ export const isAdmin = (req, res, next) => {
   next();
 };
 
-export const validateOwner = (req, res, next) => {
-  if (!(req.user.id == req.body.createdby)) {
-    return res.status(403).json({ status: 403, error: 'Please enter a password ' });
+export const isNotAdmin = (req, res, next) => {
+  if (req.user.isadmin) {
+    return res.status(403).json({ status: 403, error: 'No admins allowed on this route' });
   }
   next();
+};
+
+export const validateOwner = (req, res, next) => {
+  getIncident(parseInt(req.params.id, 10))
+    .then((incident) => {
+      if (!(req.user.id === incident.createdby)) {
+        return res.status(403).json({ status: 403, error: 'Unauthorized!' });
+      }
+      next();
+    })
+    .catch(err => res.status(500).json({ status: 403, error: err.message }));
 };

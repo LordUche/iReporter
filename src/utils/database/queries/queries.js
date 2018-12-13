@@ -6,4 +6,6 @@ export const insertAdmin = user => db.one(
   user,
 );
 
+export const getIncident = id => db.one('SELECT * FROM incidents WHERE id=$1', id);
+
 export const deleteAll = relation => db.none(`DELETE FROM ${relation}`);
