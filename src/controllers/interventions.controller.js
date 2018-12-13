@@ -1,9 +1,9 @@
-import redFlags from '../utils/database/queries/red-flags.queries';
-import RedFlag from '../models/red-flag.model';
+import interventions from '../utils/database/queries/interventions.queries';
+import Intervention from '../models/intervention.model';
 
-export default class RedFlagsController {
+export default class InterventionsController {
   static index(req, res) {
-    return redFlags
+    return interventions
       .getAll()
       .then((data) => {
         res.status(200).json({ status: 200, data });
@@ -14,7 +14,7 @@ export default class RedFlagsController {
   }
 
   static get(req, res) {
-    redFlags
+    interventions
       .get(parseInt(req.params.id, 10))
       .then((data) => {
         res.status(200).json({ status: 200, data: [{ ...data }] });
@@ -26,12 +26,12 @@ export default class RedFlagsController {
 
   static create(req, res) {
     const createdBy = req.user.id;
-    return redFlags
-      .create({ ...new RedFlag(req.body), createdBy })
+    return interventions
+      .create({ ...new Intervention(req.body), createdBy })
       .then((data) => {
         res
           .status(201)
-          .json({ status: 201, data: [{ ...data, message: 'Created red-flag record' }] });
+          .json({ status: 201, data: [{ ...data, message: 'Created intervention record' }] });
       })
       .catch((err) => {
         res.status(500).json({ status: 500, error: err.message });
@@ -40,12 +40,12 @@ export default class RedFlagsController {
 
   static updateLocation(req, res) {
     const { location } = req.body;
-    return redFlags
+    return interventions
       .updateLocation(parseInt(req.params.id, 10), location)
       .then((data) => {
         res.status(200).json({
           status: 200,
-          data: [{ ...data, message: "Updated red-flag record's location" }],
+          data: [{ ...data, message: "Updated intervention record's location" }],
         });
       })
       .catch((err) => {
@@ -55,12 +55,12 @@ export default class RedFlagsController {
 
   static updateComment(req, res) {
     const { comment } = req.body;
-    return redFlags
+    return interventions
       .updateComment(parseInt(req.params.id, 10), comment)
       .then((data) => {
         res.status(200).json({
           status: 200,
-          data: [{ ...data, message: "Updated red-flag record's comment" }],
+          data: [{ ...data, message: "Updated intervention record's comment" }],
         });
       })
       .catch((err) => {
@@ -70,12 +70,12 @@ export default class RedFlagsController {
 
   static updateStatus(req, res) {
     const { status } = req.body;
-    return redFlags
+    return interventions
       .updateStatus(parseInt(req.params.id, 10), status)
       .then((data) => {
         res.status(200).json({
           status: 200,
-          data: [{ ...data, message: "Updated red-flag record's status" }],
+          data: [{ ...data, message: "Updated intervention record's status" }],
         });
       })
       .catch((err) => {
@@ -84,12 +84,12 @@ export default class RedFlagsController {
   }
 
   static delete(req, res) {
-    return redFlags
+    return interventions
       .delete(parseInt(req.params.id, 10))
       .then((data) => {
         res
           .status(200)
-          .json({ status: 200, data: [{ ...data, message: 'Deleted red-flag record' }] });
+          .json({ status: 200, data: [{ ...data, message: 'Deleted intervention record' }] });
       })
       .catch((err) => {
         res.status(500).json({ status: 500, error: err.message });

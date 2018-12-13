@@ -1,13 +1,13 @@
 /* eslint-disable no-template-curly-in-string */
 import db from '../config';
 
-export default class RedFlagsQuery {
+export default class InterventionsQuery {
   static getAll() {
-    return db.any('SELECT * FROM incidents WHERE type=$1', 'red-flag');
+    return db.any('SELECT * FROM incidents WHERE type=$1', 'intervention');
   }
 
   static get(id) {
-    return db.one('SELECT * FROM incidents WHERE type=$1 AND id=$2', ['red-flag', id]);
+    return db.one('SELECT * FROM incidents WHERE type=$1 AND id=$2', ['intervention', id]);
   }
 
   static create(data) {
@@ -20,7 +20,7 @@ export default class RedFlagsQuery {
   static updateLocation(id, location) {
     return db.one('UPDATE incidents SET location=$1 WHERE type=$2 AND id=$3 RETURNING ID', [
       location,
-      'red-flag',
+      'intervention',
       id,
     ]);
   }
@@ -28,7 +28,7 @@ export default class RedFlagsQuery {
   static updateComment(id, comment) {
     return db.one('UPDATE incidents SET comment=$1 WHERE type=$2 AND id=$3 RETURNING ID', [
       comment,
-      'red-flag',
+      'intervention',
       id,
     ]);
   }
@@ -36,12 +36,15 @@ export default class RedFlagsQuery {
   static updateStatus(id, status) {
     return db.one('UPDATE incidents SET status=$1 WHERE type=$2 AND id=$3 RETURNING ID', [
       status,
-      'red-flag',
+      'intervention',
       id,
     ]);
   }
 
   static delete(id) {
-    return db.one('DELETE FROM incidents WHERE type=$1 AND id=$2 RETURNING ID', ['red-flag', id]);
+    return db.one('DELETE FROM incidents WHERE type=$1 AND id=$2 RETURNING ID', [
+      'intervention',
+      id,
+    ]);
   }
 }
