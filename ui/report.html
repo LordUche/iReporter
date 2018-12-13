@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+  
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,7 @@
               <strong>intervention</strong>
               <em>(a call for a government agency to intervene e.g repair bad road sections collapsed bridges flooding
                 e.t.c)</em>
-            </div>
+              </div>
           </div>
           <select name="type" id="type">
             <option value="" disabled selected>Select type...</option>
@@ -67,8 +67,9 @@
             <i class="fa fa-map-marker"></i> Location
           </label>
           <div class="fx-row">
-            <input type="text" name="latitude" id="latitude" placeholder="Latitude" class="flex col-1-3 mr-2">
-            <input type="text" name="longitude" id="longitude" placeholder="Longitude" class="flex col-1-3 ml-2">
+            <input type="text" placeholder="Enter a location" id="location">
+            <input type="text" name="latitude" id="latitude" placeholder="Latitude" class="flex col-1-3 mr-2" disabled>
+            <input type="text" name="longitude" id="longitude" placeholder="Longitude" class="flex col-1-3 ml-2" disabled>
           </div>
           <label for="images" class="mt-2">
             <i class="fa fa-picture-o"></i> Photos of Incident
@@ -89,6 +90,8 @@
   <footer id="#footer" class="flex tc">
     <p>Copyright © 2018</p>
   </footer>
+  <script src="./main.js" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=init" async defer></script>
 </body>
 
 </html>

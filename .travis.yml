@@ -1,8 +1,11 @@
 language: node_js
 node_js:
-- node
+  - node
+before_script:
+  # - psql -c 'create database travis_ci_test;' -U postgres
+  - psql -f ./src/utils/database/db.sql -U postgres
 after_success:
-- npm run coverage
+  - npm run coverage
 deploy:
   provider: heroku
   api_key:
