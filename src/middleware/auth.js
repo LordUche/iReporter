@@ -39,5 +39,5 @@ export const validateOwner = (req, res, next) => {
       }
       next();
     })
-    .catch(err => res.status(500).json({ status: 403, error: err.message }));
+    .catch(err => res.status(500).json({ status: 500, error: err.message }));
 };
