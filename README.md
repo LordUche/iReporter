@@ -30,7 +30,18 @@ cd iReporter
 npm install
 ```
 
-Then create a `.env` file and enter values for the `JWT_SECRET` and `DATABASE_URL` environment variables
+Create a `.env` file and enter values for the `JWT_SECRET` and `DATABASE_URL` environment variables
+Then run the following command to create a local database and tables
+
+```bash
+psql -f src/utils/database/db.sql
+```
+
+## Starting the dev server
+
+```bash
+npm run serve
+```
 
 ## Running the tests
 
@@ -73,7 +84,7 @@ cat db.sql | heroku pg:psql
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 ## Acknowledgments
 
