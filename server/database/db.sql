@@ -20,7 +20,7 @@ CREATE TABLE users (
   username varchar NOT NULL UNIQUE,
   registered timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   isAdmin boolean NOT NULL DEFAULT false,
-  passwordHash varchar NOT NULL
+  hash varchar NOT NULL
 );
 
 -- INCIDENTS TABLE
