@@ -3,11 +3,11 @@ node_js:
   - node
 before_script:
   # - psql -c 'create database travis_ci_test;' -U postgres
-  - psql -f ./src/utils/database/db.sql -U postgres
+  - psql -f ./server/database/db.sql -U postgres
 after_success:
   - npm run coverage
 deploy:
   provider: heroku
   api_key:
     secure: Q3zOe/hgDLRfJRwIapcR4BlZIOCQrAyOMJlPQ4V7zwnb13Dc/pGLvH00WxUaZynyIuRmDnWWGxVjo/mSHEzLk5Ma49C7epsgvOpxhdXoNqExEMqrFaHsmUksusfxCADYJxUZeHowqX54T2CEyoInbjCHDf7kvjuLXqfaBEn07hqIlxmYnDwI0IBu3gocQBrGL0P13T82qzH8oQj0Efrq+gvq2YruN3SmiQef2ges2cftyN51QCbH1gH6rhC2EE3GXH+pblSsVs6xjoW3IUBdsNBLPXWhRtcmt6dzMi6UqB8lZt+sXHBgyF5RB0CJW+2SyCIWXFbBNMRP50HRLJPvgmVEFzNJrZOBJe0PFra/41WOkNcCEBj7OVZ6B91uoRr8OHQtb+8Q4TdaZozw7fE+7a31DmbsSTMV8GypGOAYzIaF5AT11PVeUf52J4RXpIVvOPJPfHTN/y0jqBWYX9bZV5CELWQ6+MQDOH8iVc/50nmDovI6mQg7xU0jJ7KgMdusmwedknFJmYjUjl2ABVFDJpqGMPTq7p4SXE3HvN6/ERdnw7Bv+I6uuwyrKdlHXPbu4fLJ5No5Cweou1jmcYp/T2d7N7F41fyp7xkirBA/aw2AcpDl16v+zmwhgqz/kstVQaYoi3ZEEBBR6tSanukFeLOxPPQ2lijCta6i3L6KZCA=
-  app: shrouded-tor-69589
+  app: uche-ireporter

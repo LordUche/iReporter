@@ -2,18 +2,16 @@
   "name": "ireporter-api",
   "version": "1.0.0",
   "description": "iReporter enables any/every citizen to bring any form of corruption to the notice of appropriate authorities and the general public. Users can also report on things that needs government intervention",
-  "main": "src/app.js",
+  "main": "server/index.js",
   "scripts": {
-    "start": "env NODE_ENV=production node ./build/app.js",
+    "start": "cross-env NODE_ENV=production node build/index.js",
     "prestart": "npm run build",
+    "build": "babel -d build server --source-maps",
     "prebuild": "rm -rf build/*",
-    "build": "babel -d ./build ./src",
-    "serve": "nodemon --exec babel-node src/app.js",
-    "test": "env NODE_ENV=test nyc --reporter=text mocha ./test/**/*.spec.js --timeout=10000 --exit",
-    "coverage": "nyc report --reporter=lcov --reporter=text-lcov | coveralls",
-    "cover": "nyc report --reporter=lcov --reporter=text-lcov",
-    "lint:init": "eslint --init",
-    "createdb": "psql -f ./src/utils/database/db.sql"
+    "postbuild": "node build/database/migrate.js",
+    "serve": "cross-env NODE_ENV=development nodemon --exec babel-node server/index.js",
+    "test": "cross-env NODE_ENV=test nyc --reporter=text --reporter=html mocha --timeout=3000 --recursive --exit",
+    "coverage": "nyc report --reporter=lcov --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -26,6 +24,8 @@
   },
   "homepage": "https://github.com/LordUche/iReporter-API#readme",
   "devDependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "@babel/register": "^7.0.0",
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
     "coveralls": "^3.0.2",
@@ -43,9 +43,7 @@
     "@babel/cli": "^7.2.0",
     "@babel/core": "^7.2.0",
     "@babel/node": "^7.2.0",
-    "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.2.0",
-    "@babel/register": "^7.0.0",
     "bcrypt": "^3.0.2",
     "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
@@ -67,7 +65,10 @@
       "@babel/polyfill"
     ],
     "include": [
-      "src/**/*.js"
+      "server/**/*.js"
+    ],
+    "exclude": [
+      "node_modules/*"
     ]
   }
 }
