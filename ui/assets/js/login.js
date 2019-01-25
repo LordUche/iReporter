@@ -5,7 +5,7 @@ const [form] = document.forms;
 function login(e) {
   e.preventDefault();
 
-  const url = 'http://localhost:3000/api/v1/auth/login';
+  const url = 'https://uche-ireporter.herokuapp.com/api/v1/auth/login';
   const { email, password } = this;
   const data = {
     email: email.value,

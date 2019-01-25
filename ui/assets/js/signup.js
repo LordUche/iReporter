@@ -80,7 +80,7 @@ function populateCountries(e) {
 function signup(e) {
   e.preventDefault();
 
-  const url = 'http://localhost:3000/api/v1/auth/signup';
+  const url = 'https://uche-ireporter.herokuapp.com/api/v1/auth/signup';
   const {
     firstname, lastname, othernames, username, country, phonenumber, email, password,
   } = this;

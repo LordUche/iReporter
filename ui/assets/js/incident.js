@@ -5,7 +5,7 @@ const statusTxt = document.querySelector('.status');
 const createdOnTxt = document.querySelector('.created-on');
 const type = new URLSearchParams(location.search).get('type');
 const id = new URLSearchParams(location.search).get('id');
-const url = `http://localhost:3000/api/v1/${type}s/${id}`;
+const url = `https://uche-ireporter.herokuapp.com/api/v1/${type}s/${id}`;
 const headers = new Headers({
   'Content-Type': 'application/json; charset=UTF-8',
   'access-token': localStorage.token,

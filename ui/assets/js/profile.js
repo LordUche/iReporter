@@ -56,7 +56,7 @@ function displayIncidents(data) {
 }
 
 function getProfile() {
-  const request = new Request('http://localhost:3000/api/v1/profile', {
+  const request = new Request('https://uche-ireporter.herokuapp.com/api/v1/profile', {
     headers: new Headers({
       'content-type': 'application/json; charset=UTF-8',
       'access-token': localStorage.getItem('token'),

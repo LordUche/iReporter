@@ -6,7 +6,7 @@ function report(e) {
   const {
     type, latitude, longitude, comment,
   } = this;
-  const url = `http://localhost:3000/api/v1/${type.value}s`;
+  const url = `https://uche-ireporter.herokuapp.com/api/v1/${type.value}s`;
   const request = new Request(url, {
     method: 'post',
     headers: new Headers({
