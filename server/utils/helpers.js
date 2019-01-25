@@ -4,8 +4,12 @@ const PNF = PhoneNumberFormat;
 const phoneUtil = PhoneNumberUtil.getInstance();
 
 export function isValidPhoneNumber(phoneNumber, country) {
-  const number = phoneUtil.parse(phoneNumber, country);
-  return phoneUtil.isValidNumberForRegion(number, country);
+  try {
+    const number = phoneUtil.parse(phoneNumber, country);
+    return phoneUtil.isValidNumberForRegion(number, country);
+  } catch (e) {
+    return false;
+  }
 }
 
 export function formatPhoneNumber(phoneNumber, country) {

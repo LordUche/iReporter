@@ -28,7 +28,7 @@ CREATE TABLE users (
 CREATE TABLE incidents (
   ID serial PRIMARY KEY,
   createdOn timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  createdBy int references users(ID) NOT NULL,
+  createdBy int references users(ID) NOT NULL ON DELETE CASCADE,
   type incident NOT NULL,
   location varchar NOT NULL,
   status status NOT NULL DEFAULT 'draft',

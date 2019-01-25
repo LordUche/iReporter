@@ -4,6 +4,7 @@ import Joi from 'joi';
 import { signupSchema, loginSchema } from '../utils/schema';
 import { isValidPhoneNumber, formatPhoneNumber } from '../utils/helpers';
 import query from '../database/queries/incidents';
+import countries from '../utils/country_names';
 
 const options = { abortEarly: false, allowUnknown: true };
 
@@ -35,7 +36,7 @@ export function validateSignup(req, res, next) {
         } else {
           return res.status(400).json({
             status: res.statusCode,
-            error: '"phonenumber" must be a valid phone number',
+            errors: [`${req.body.phonenumber} is not a valid phone number in ${countries[country.toUpperCase()]}`],
           });
         }
       }
