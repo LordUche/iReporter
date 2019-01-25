@@ -1,7 +1,5 @@
 import db from './config';
 
-const dropIncidentType = 'DROP TYPE IF EXISTS incident';
-const dropStatusType = 'DROP TYPE IF EXISTS status';
 const createIncidentType = "CREATE TYPE incident AS ENUM ('red-flag', 'intervention')";
 const createStatusType = "CREATE TYPE status AS ENUM ('draft', 'under investigation', 'rejected', 'resolved')";
 const createUsersTable = `CREATE TABLE users (
@@ -30,15 +28,14 @@ const createIncidentsTable = `CREATE TABLE incidents (
 
 function migrate() {
   db.tx((trx) => {
-    trx.batch([
-      trx.none(dropIncidentType),
-      trx.none(dropStatusType),
-      trx.none(createIncidentType),
-      trx.none(createStatusType),
-      trx.none(createUsersTable),
-      trx.none(createIncidentsTable),
-    ])
-      .then(() => console.log('MIGRATED'))
+    trx
+      .batch([
+        trx.none(createIncidentType),
+        trx.none(createStatusType),
+        trx.none(createUsersTable),
+        trx.none(createIncidentsTable),
+      ])
+      .then(() => console.log('DATABASE SETUP'))
       .catch(err => console.log(`Error: ${err.message}`));
   });
 }
