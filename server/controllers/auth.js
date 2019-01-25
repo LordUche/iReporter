@@ -12,6 +12,7 @@ export default class AuthController {
       })
       .catch((err) => {
         const error = err.code == 23505 ? err.detail : 'Something went wrong, please try again.';
+        console.log(err.message);
         res.status(500).json({ status: res.statusCode, error });
       });
   }
