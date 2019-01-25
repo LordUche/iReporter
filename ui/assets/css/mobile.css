@@ -1,0 +1,41 @@
+@media only screen and (max-width: 767px) {
+  #header .branding {
+    color: #fff !important;
+  }
+
+  .col-m {
+    width: 100%;
+  }
+
+  .col-1-2m {
+    width: 50%;
+  }
+
+  .col-1-3m {
+    width: 33.333333%;
+  }
+
+  .col-2-3m {
+    width: 66.666666%;
+  }
+
+  .col-1-4m {
+    width: 25%;
+  }
+
+  .col-3-4m {
+    width: 75%;
+  }
+
+  .col-1-6m {
+    width: 16.666666%;
+  }
+
+  .col-5-6m {
+    width: 83.333333%;
+  }
+
+  .hide-m {
+    display: none;
+  }
+}

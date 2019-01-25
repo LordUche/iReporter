@@ -1,0 +1,46 @@
+@media only screen and (min-width: 768px) {
+  .col-l {
+    width: 100%;
+  }
+
+  .col-1-2l {
+    width: 50%;
+  }
+
+  .col-1-3l {
+    width: 33.333333%;
+  }
+
+  .col-2-3l {
+    width: 66.666666%;
+  }
+
+  .col-1-4l {
+    width: 25%;
+  }
+
+  .col-3-4l {
+    width: 75%;
+  }
+
+  .col-1-6l {
+    width: 16.666666%;
+  }
+
+  .col-5-6l {
+    width: 83.333333%;
+  }
+
+  .hide-l {
+    display: none;
+  }
+
+  #header {
+    background-color: #fff;
+    color: #112f41;
+  }
+
+  #header .branding {
+    text-align: left;
+  }
+}

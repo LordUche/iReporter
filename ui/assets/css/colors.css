@@ -1,0 +1,40 @@
+.primary {
+  color: #4fb99f;
+}
+
+.accent {
+  color: #112f41;
+}
+
+.success {
+  color: #068587;
+}
+
+.warn {
+  color: #f2b134;
+}
+
+.error {
+  color: #ed553b;
+}
+
+.gold {
+  color: #f1c232;
+}
+
+.silver {
+  color: #999;
+}
+
+.white {
+  color: #fff;
+}
+
+.black {
+  color: #333;
+}
+
+.bg-black {
+  background-color: #333;
+  color: #fff;
+}

@@ -1,0 +1,40 @@
+
+#header {
+  height: 44px;
+  background-color: #4fb99f;
+  color: #fff;
+}
+
+#header .branding {
+  text-align: center;
+  line-height: 44px;
+  flex-grow: 1;
+  font-weight: 600;
+}
+
+#header nav {
+  line-height: 44px;
+}
+
+#header nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+#header nav li {
+  margin: 0 5px;
+}
+
+#header button {
+  line-height: 30px;
+  border: none;
+}
+
+#header button a {
+  color: #fff;
+}
+
+#header a {
+  text-decoration: none;
+}

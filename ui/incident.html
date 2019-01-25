@@ -1,106 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>iReporter | Incident</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,600,600i,700,700i,900,900i"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,900"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>iReporter | Incident</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,900" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css">
-</head>
-
-<body>
-  <header id="header">
-    <div class="container fx-row">
-      <a class="branding" href="../index.html">
-        <i class="fa fa-balance-scale fa-lg"></i>
-        <span class="brand-name">iReporter</span>
-      </a>
-      <nav>
-        <ul>
-          <li>
-            <a href="./report.html">
-              <button class="success">
-                <i class="fa fa-plus"></i>
-                Report Incident
-              </button>
+  <body>
+    <header id="header">
+      <div class="container fx-row">
+        <a class="branding" href="../index.html">
+          <i class="fa fa-balance-scale fa-lg"></i>
+          <span class="brand-name">iReporter</span>
+        </a>
+        <nav>
+          <ul>
+            <li class="active">
+              <a href="./profile.html">
+                <i class="fa fa-user-circle accent"></i>
+                <span class="username"></span>
+              </a>
+            </li>
+            <li class="logout"><i class="fa fa-power-off error"></i> logout</li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <!-- Incident Details -->
+        <section class="fx-row">
+          <section class="flex col-m l5">
+            <div>
+              <span class="title comment"></span>
+              <i class="fa fa-pencil t-sm" onclick="editComment()"></i>
+            </div>
+            <p>
+              <i class="fa fa-map-marker mr-2"></i>
+              <span class="location"></span>
+            </p>
+            <p><span class="type"></span> <span class="status"></span></p>
+            <p><span class="created-on"></span></p>
+          </section>
+          <div class="col-m fx-row je as flex">
+            <a href="./update.html" class="btn accent">
+              <span class="">Update</span>
             </a>
-          </li>
-          <li class="active">
-            <a href="./profile.html">
-              <i class="fa fa-user-circle accent"></i> <span class="hide-m">uchennai</span>
-            </a>
-          </li>
-          <li><i class="fa fa-bell"></i></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  <main>
-    <div class="container">
-      <!-- Incident Details -->
-      <section class="fx-row">
-        <section class="flex col-m l5">
-          <h2>Flood in High-Level, Makurdi</h2>
-          <p><i class="fa fa-map-marker mr-2"></i>Lat: 7.7153986 Lon: 8.5085987</p>
-          <p>
-            <i class="fa fa-exclamation-triangle warn mr-1"></i>
-            intervention
-            <i class="fa fa-check success ml-2"></i>
-            resolved
-          </p>
-          <p>
-            <i class="fa fa-user-circle gold mr-1"></i> uchennai
-            <i class="fa fa-clock-o ml-2"></i> 05/11/2018 @ 4:30pm
-          </p>
+            <button class="error ml-2" onclick="openPopup('#deletePopup')">
+              Delete
+            </button>
+          </div>
         </section>
-        <div class="col-m fx-row je as flex">
-          <a href="./status.html" class="btn primary mr-2">Change Status</a>
-          <a href="./update.html" class="btn accent">
-            <span class="">Update</span>
-          </a>
-          <button class="error ml-2" onclick="confirm('Are you sure you want to delete this incident?')">Delete</button>
-        </div>
-      </section>
-      <section class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31629.592886140537!2d8.50859873089954!3d7.715398594060504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x105080336e2846fb%3A0x88b4ad46672b4fed!2sHigh+Level%2C+Kanshio!5e0!3m2!1sen!2sng!4v1542983682591" width="2560" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
-      </section>
-      <section>
-        <label>Images</label>
-        <div class="fx-row">
-          <div class="p2 col-1-3">
-            <img src="https://via.placeholder.com/320" alt="placeholder">
-          </div>
+        <section class="map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31629.592886140537!2d8.50859873089954!3d7.715398594060504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x105080336e2846fb%3A0x88b4ad46672b4fed!2sHigh+Level%2C+Kanshio!5e0!3m2!1sen!2sng!4v1542983682591"
+            width="2560"
+            height="250"
+            frameborder="0"
+            style="border:0"
+            allowfullscreen
+          ></iframe>
+        </section>
+        <section>
+          <label>Images</label>
+          <div class="fx-row">
             <div class="p2 col-1-3">
-              <img src="https://via.placeholder.com/320" alt="placeholder">
-          </div>
-              <div class="p2 col-1-3">
-                <img src="https://via.placeholder.com/320" alt="placeholder">
-          </div>
-              </div>
-      </section>
-      <section>
-        <label>Videos</label>
-        <div class="fx-row">
-          <div class="p2 col-1-3">
-            <img src="https://via.placeholder.com/320" alt="placeholder">
-          </div>
+              <img src="https://via.placeholder.com/320" alt="placeholder" />
+            </div>
             <div class="p2 col-1-3">
-              <img src="https://via.placeholder.com/320" alt="placeholder">
+              <img src="https://via.placeholder.com/320" alt="placeholder" />
+            </div>
+            <div class="p2 col-1-3">
+              <img src="https://via.placeholder.com/320" alt="placeholder" />
+            </div>
           </div>
-              <div class="p2 col-1-3">
-                <img src="https://via.placeholder.com/320" alt="placeholder">
+        </section>
+        <section>
+          <label>Videos</label>
+          <div class="fx-row">
+            <div class="p2 col-1-3">
+              <img src="https://via.placeholder.com/320" alt="placeholder" />
+            </div>
+            <div class="p2 col-1-3">
+              <img src="https://via.placeholder.com/320" alt="placeholder" />
+            </div>
+            <div class="p2 col-1-3">
+              <img src="https://via.placeholder.com/320" alt="placeholder" />
+            </div>
           </div>
-              </div>
-      </section>
-    </div>
-  </main>
-  <footer id="#footer" class="flex tc">
-    <p>Copyright © 2018</p>
-  </footer>
-</body>
+        </section>
+      </div>
+    </main>
+    <footer id="#footer" class="flex tc"><p>Copyright © 2018</p></footer>
 
+    <div id="deletePopup" class="overlay">
+      <div class="popup">
+        <h2>Are you sure you want to delete this incident?</h2>
+        <div class="content">
+          <button class="btn error" onclick="deleteIncident()">Delete</button>
+          <button class="btn accent" onclick="closePopup('#deletePopup')">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="editCommentPopup" class="overlay">
+      <div class="popup">
+        <h2>Edit comment</h2>
+        <textarea id="editCommentTxt"></textarea>
+        <button onclick="updateComment(event)" class="btn primary">
+          Update
+        </button>
+        <button class="btn accent" onclick="closePopup('#editCommentPopup')">
+          Cancel
+        </button>
+      </div>
+    </div>
+    <div id="editLocationPopup" class="overlay">
+      <div class="popup">
+        <h2>Edit location</h2>
+        <input type="text" id="editLocationTxt">
+        <button onclick="updateLocation(event)" class="btn primary">
+          Update
+        </button>
+        <button class="btn accent" onclick="closePopup('#editLocationPopup')">
+          Cancel
+        </button>
+      </div>
+    </div>
+    <script src="./assets/js/main.js" async defer></script>
+    <script src="./assets/js/incident.js" async defer></script>
+  </body>
 </html>
