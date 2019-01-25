@@ -166,11 +166,11 @@ describe('Auth routes', () => {
         .post(baseUrl)
         .send(badPhoneNumber)
         .end((err, res) => {
-          const { status, error, data } = res.body;
+          const { status, errors, data } = res.body;
           expect(res.statusCode).to.equal(400);
           expect(status).to.equal(res.statusCode);
           expect(data).to.not.exist;
-          expect(error).to.be.a('string').and.to.contain('phone number');
+          expect(errors[0]).to.be.a('string').and.to.contain('phone number');
           done(err);
         });
     });
